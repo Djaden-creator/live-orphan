@@ -112,12 +112,6 @@ public function getChildren(){
                 ?>
 <tbody class="fetchrecord" id="fullchildren<?php echo $rows['idChild']?>">
     <tr>
-        <td>
-            <span class="custom-checkbox">
-                <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                <label for="checkbox1"></label>
-            </span>
-        </td>
         <td><img src="<?php echo $rows['photos']?>" alt="" style="height: 30px;width:30px;object-fit:contain;"></td>
         <td><?php echo $rows['name']?></td>
         <td><?php echo $diff->format('%y'); ?> ans</td>
@@ -174,39 +168,9 @@ public function editChild() {
                 $sex = $_POST['sex'];
                 $pays = $_POST['pays'];
                 $getme = $_POST['getme'];
-    
-                $photo=$_FILES['photo'];
-                $filename=$_FILES['photo']['name'];
-                $file_size=$_FILES['photo']['size'];
-                $file_error=$_FILES['photo']['error'];
-                $tmp=$_FILES['photo']['tmp_name'];
-                $file_type=$_FILES['photo']['type'];
                 
-                $fileext=explode('.',$filename);
-                $filecheck=strtolower(end($fileext));
-               
-                $destinationfile='../picture/'.$name.'/images/';
-                $target_file=$destinationfile.basename($_FILES['photo']['name']);
-                 $extensions=array("jpeg","jpg","png","webp","ARW");
-                 $max_file_size = 200000000;
-                 if (in_array($filecheck,$extensions)==false) {
-                    ?>
-<span class="d-flex justify-content-center text-success">
-    la photo a été ajouté
-</span>
-<?php
-                            }
-                            if (!file_exists ($destinationfile)) {
-                             mkdir($destinationfile,0777,true);
-                             }
-                           move_uploaded_file($tmp,$target_file);
-                          $url=$_SERVER['HTTP_REFERER'];
-                          $seg=explode('/',$url);
-                          $path=$seg[0].'/'.$seg[1].'/'.$seg[2].'/'.$seg[3].'/'.$seg[4];
-                          $full_url=$path.'/'.'picture/'.$name.'/images/'.$filename;
-
                           $query = "UPDATE children
-                          SET name =:name, date = :date, sex=:sex,pays=:pays,photos=:full_url
+                          SET name =:name, date = :date, sex=:sex,pays=:pays
                           WHERE idChild='$getme'";
                              
                            $statement=$pdo->prepare($query);
@@ -214,7 +178,6 @@ public function editChild() {
                            $statement->bindParam(':date',$date);
                            $statement->bindParam(':sex',$sex);
                            $statement->bindParam(':pays',$pays);
-                           $statement->bindParam(':full_url',$full_url);
                           if($statement->execute()){
                             ?>
 <span class="d-flex justify-content-center text-success">
@@ -236,6 +199,78 @@ catch(PDOException $e){
 }
 }
 
+
+public function editChildpicture() {
+    $dsn = 'mysql:host=localhost;dbname=orphelinat';
+    $username = 'root';
+    $password = getenv('');
+
+    try{
+        $pdo = new PDO($dsn, $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //getting all data from the database
+                if(isset($_POST['edititpicture'])){
+                   
+                $idchildsure = $_POST['idchildsure'];
+                $childname = $_POST['childname'];
+
+                $photo=$_FILES['photo'];
+                $filename=$_FILES['photo']['name'];
+                $file_size=$_FILES['photo']['size'];
+                $file_error=$_FILES['photo']['error'];
+                $tmp=$_FILES['photo']['tmp_name'];
+                $file_type=$_FILES['photo']['type'];
+                
+                $fileext=explode('.',$filename);
+                $filecheck=strtolower(end($fileext));
+               
+                $destinationfile='../picture/'.$childname.'/images/';
+                $target_file=$destinationfile.basename($_FILES['photo']['name']);
+                 $extensions=array("jpeg","jpg","png","webp","ARW");
+                 $max_file_size = 200000000;
+                 if (in_array($filecheck,$extensions)==false) {
+                    ?>
+<span class="d-flex justify-content-center text-success">
+    la photo a été ajouté
+</span>
+<?php
+                            }
+                            if (!file_exists ($destinationfile)) {
+                             mkdir($destinationfile,0777,true);
+                             }
+                           move_uploaded_file($tmp,$target_file);
+                          $url=$_SERVER['HTTP_REFERER'];
+                          $seg=explode('/',$url);
+                          $path=$seg[0].'/'.$seg[1].'/'.$seg[2].'/'.$seg[3].'/'.$seg[4];
+                          $full_url=$path.'/'.'picture/'.$childname.'/images/'.$filename;
+                
+                          $query = "UPDATE children
+                          SET photos =:full_url
+                          WHERE idChild=:idchildsure";
+                             
+                           $statement=$pdo->prepare($query);
+                           $statement->bindParam(':full_url',$full_url);
+                           $statement->bindParam(':idchildsure',$idchildsure);
+                          if($statement->execute()){
+                            ?>
+<span class="alert alert-success d-flex justify-content-center" style="font-size:12px;">
+    photo modifier avec succée
+</span>
+<?php
+                          }
+                          else{
+                            ?>
+<span class="d-flex justify-content-center text-danger">
+    oupss veuillez recommencer!!
+</span>
+<?php
+            }
+}
+}
+catch(PDOException $e){
+    echo"error:".$e->getMessage();
+}
+}
 //get children for all users in the timeline page
 
 public function getChildrenforUser(){
@@ -258,7 +293,7 @@ public function getChildrenforUser(){
                 $today = date("Y-m-d");
                 $diff = date_diff(date_create($dateOfBirth), date_create($today));
                 ?>
-<div class="col-sm-2 mb-3 mb-sm-0">
+<div class="col-sm-2 mb-3 mb-sm-0 mt-3">
     <div class="card">
         <?php
     $id=$rows['idChild'];
@@ -267,6 +302,29 @@ public function getChildrenforUser(){
 ?>
         <img src="<?php echo $rows['photos'] ?>" class="img-fluid"
             style="height: 150px;width: 100%; object-fit: container;" alt="...">
+        <?php
+              if($diff->format('%y') <= 6){
+                ?>
+        <span class="mai-star" title="youngest"
+            style="font-size:30px;position:relative;margin-top:-40px;color:#b37400;"></span>
+        <?php
+              }elseif($diff->format('%y') >6 && $diff->format('%y') <=10 ){
+                ?>
+        <span class="mai-arrow-up" title="younger"
+            style="font-size:40px;position:relative;margin-top:-40px;color:#b37400;"></span>
+        <?php
+              }elseif($diff->format('%y') >10 && $diff->format('%y') <=18){
+                ?>
+        <span class="mai-thunderstorm" title="young"
+            style="font-size:40px;position:relative;margin-top:-40px;color:#d94350;"></span>
+        <?php
+              }else{
+                ?>
+        <span class="mai-arrow-down" title="adult"
+            style="font-size:40px;position:relative;margin-top:-40px;color:#e69500;"></span>
+        <?php
+              }
+            ?>
         <div class="text-center" style="margin: 10px;">
             <h5 style="font-size: 12px;font-style: bold;"><?php echo $rows['name'] ?></h5>
             <h5 style="font-size: 12px;font-style: bold;"><?php echo $diff->format('%y'); ?> ans,
@@ -279,19 +337,30 @@ public function getChildrenforUser(){
                 foreach($childd as $chilrow){
                     if($chilrow['decision']=='Rejeté'){
                         ?>
-            <a href="<?=$link2;?>" class="btn btn-danger" title="cet enfant est reprenable">disponible</a>
+            <a href="<?=$link2;?>">
+                <button class="btn btn-danger" style="color:white;font-size:10px;"
+                    title="cet enfant est reprenable">disponible</button></a>
             <?php
                     }elseif($chilrow['decision']=='Accepté'){
                         ?>
-            <button class="btn btn-success" style="color:white" title="cet enfant est deja adopté">Adopté</button>
+            <button class="btn btn-success" style="color:white;font-size:10px;" title="cet enfant est deja adopté">Deja
+                adopté</button>
             <?php
                     }elseif($chilrow['decision']=='encours'){
                         ?>
-            <button class="btn btn-warning" style="color:white" title="cet enfant est deja demandé">Demandé</button>
+            <button class="btn btn-warning" style="color:white;font-size:10px;"
+                title="cet enfant est deja demandé">Demandé</button>
             <?php
-                    }else{
+                    }elseif($chilrow['decision']=='en avance'){
                         ?>
-            <a href="<?=$link2;?>" class="btn btn-primary" title="cet enfant est disponible">disponible</a>
+            <button class="btn btn-warning" style="color:white;font-size:10px;"
+                title="cet enfant est deja demandé">pending..</button>
+            <?php
+                    }
+                    else{
+                        ?>
+            <a href="<?=$link2;?>" class="btn btn-primary" style="color:white;font-size:10px;"
+                title="cet enfant est disponible">disponible</a>
             <?php
                        }
                 }
@@ -299,7 +368,8 @@ public function getChildrenforUser(){
             <?php
                }else{
                 ?>
-            <a href="<?=$link2;?>" class="btn btn-primary" title="cet enfant est disponible">disponible</a>
+            <a href="<?=$link2;?>" class="btn btn-primary" style="color:white;font-size:10px;"
+                title="cet enfant est disponible">disponible</a>
             <?php
                }
             ?>

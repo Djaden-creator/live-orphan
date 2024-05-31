@@ -1,14 +1,11 @@
 <div class="page-section">
     <div class="container">
         <h1 class="text-center wow fadeInUp">Add a New service</h1>
-        <div style="display:flex;justify-content:center">
-            <?php
+        <?php
             require_once '../functions/serviceClass.php';
                $serviceclass= new serviceClass();
                $serviceclass->serviceAdd();
             ?>
-        </div>
-
         <form method="post" class="main-form">
             <div class="row mt-5 ">
                 <div class="col-12 py-2 wow fadeInLeft">

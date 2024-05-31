@@ -2,12 +2,6 @@
     <span class="text-danger notification"></span>
     <thead>
         <tr>
-            <th>
-                <span class="custom-checkbox">
-                    <input type="checkbox" id="selectAll">
-                    <label for="selectAll"></label>
-                </span>
-            </th>
             <th>N° de service</th>
             <th>type de service</th>
             <th>Actions</th>
@@ -40,12 +34,6 @@
 ?>
     <tbody>
         <tr>
-            <td>
-                <span class="custom-checkbox">
-                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                    <label for="checkbox1"></label>
-                </span>
-            </td>
             <td><?php echo $rows['idService']?></td>
             <td><?php echo $rows['type']?></td>
             <td class="d-flex">

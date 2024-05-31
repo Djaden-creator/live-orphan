@@ -144,24 +144,9 @@ public function getUser(){
                 ?>
 <tbody class="fetchrecord" id="fulluser<?php echo $rows['idUser']?>">
     <tr>
-        <td>
-            <span class="custom-checkbox">
-                <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                <label for="checkbox1"></label>
-            </span>
-        </td>
         <td><?php echo $rows['name']?></td>
         <td><?php echo $diff->format('%y'); ?> ans</td>
-        <?php
-           if($rows['idUser']==1){
-            ?><td>Administrateur</td><?php
-           }elseif($rows['idUser']==2){
-            ?><td>Moderateur</td><?php
-           }
-           else{
-            ?><td>Utilisateur</td><?php
-           }
-        ?>
+        <td><?php echo $rows['role']?></td>
         <?php
            if ($rows['niveau_du_compte']=="active"){
             ?><td id="buttonbloquer<?php echo $rows['idUser']?>"><button class="btn-primary" id="activer"
@@ -291,7 +276,7 @@ public function customUsername(){
         $max=20;
          $four=$_POST['four'];
          $myusername=$_POST['myusername'];
-        if(preg_match('/^[a-zA-Z\d\._]+$/',$myusername)){
+        if(preg_match('/^[a-zA-Z\d\._\w\W]+$/',$myusername)){
              echo'<span class="text-success" style="font-size:12px;">username valide</span>';
          }else{
             echo'<span class="text-danger" style="font-size:12px;">username invalide</span>';

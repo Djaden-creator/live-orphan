@@ -14,8 +14,17 @@ $myemail = $_POST['myemail'];
 $mynumber = $_POST['mynumber'];
 $mymessage = $_POST['mymessage'];
 if(empty($myname)||empty($myemail)||empty($mynumber)||empty($mymessage)){
-echo"<span class='alert alert-danger'>tout les champs doivent etre remplis</span>";
+echo"<span class='alert-danger' style='padding: 3px;font-size 10px;'>tout les champs doivent etre remplis</span>";
 }
+elseif (!preg_match('/^[a-zA-Z\s]+$/',$myname)){
+    echo'<span class="text-danger" style="font-size:12px;">votre nom doit avoir au moin une lettre majiscule,miniscule et un espace</span>';
+}elseif (!preg_match('/^(?:\+33\s|d)[1-9](?:\s\d{2}){4}$/',$mynumber)){
+    echo'<span class="text-danger" style="font-size:12px;">votre numero doit commencer par +33 et des espaces apres deux chifres ex:+33 1 25 63 96 96  avoir que de chiffres</span>';
+}elseif(!preg_match('/^[a-zA-Z\d\._]+@[a-zA-Z\d\._].[a-zA-Z\d\._]{2,}+$/',$myemail)){
+    echo'<span class="text-danger" style="font-size:12px;">votre email format n\'est pas valide voici un ex:eden@gmai.com</span>';
+    }elseif(!preg_match('/^[a-zA-Z\d\s\._\W\w]+$/',$mymessage)){
+        echo'<span class="text-danger" style="font-size:12px;">nous acceptons des majiscule,miniscule,chiffre,format invalide sur votre Text</span>';
+        }
 else{
     $token=random_bytes(3);
     $generate=bin2hex($token);

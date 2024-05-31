@@ -19,7 +19,7 @@ class teamClass{
                 $poste = $_POST['poste'];
                 $photo = $_FILES['photo'];
                 if(empty($name)||empty($email)||empty($dob)||empty($tel)||empty($adresse)||empty($poste)||empty($photo)){
-                 echo"<span class='alert alert-danger'>tout les champs doivent etre remplis</span>";
+                 echo"<h5 class='alert alert-danger text-center' style='font-size:14px;'>tout les champs doivent etre remplis</h5>";
                 }
                 else{
                     $photo=$_FILES['photo'];
@@ -62,12 +62,13 @@ class teamClass{
                                $statement->bindParam(':full_url',$full_url);
                               if($statement->execute()){
                                 ?>
-<span class='alert alert-success'>vous venez d'ajouter un employé</span>
+<h5 class="alert alert-success text-center" style="font-size:14px;">Vous venez d'ajouter un employé</h5>
 <?php
                               }
                               else{
                                 ?>
-<span class='alert alert-danger'>oupps l'enregistrement a echoué veuillez recommencer</span>
+<h5 class="alert alert-danger text-center" style="font-size:14px;">oupps l'enregistrement a echoué veuillez recommencer
+</h5>
 <?php
                 }
             }
@@ -75,7 +76,8 @@ class teamClass{
 }
     catch(PDOException $e){
         ?>
-<span class='alert alert-danger'>notre base de donnée ne pas disponible pour le moment reesayez plus tard</span>
+<h5 class="alert alert-danger text-center" style="font-size:14px;">notre base de donnée ne pas disponible pour le moment
+    reesayez plus tard</h5>
 <?php
     }
 }
@@ -103,12 +105,6 @@ public function getEmploye(){
                 ?>
 <tbody>
     <tr>
-        <td>
-            <span class="custom-checkbox">
-                <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                <label for="checkbox1"></label>
-            </span>
-        </td>
         <td><img src="<?php echo $rows['photo']?>" alt="" style="height: 30px;width:30px;object-fit:contain;"></td>
         <td><?php echo $rows['nom']?></td>
         <td><?php echo $diff->format('%y'); ?> ans</td>
@@ -186,25 +182,22 @@ public function editEmploye() {
                            $statement->bindParam(':poste',$poste);
                           if($statement->execute()){
                             ?>
-<span class="alert alert-success">
-    modification reussi avec succée
-</span>
+<h5 class="alert alert-success text-center" style="font-size:14px;">modification reussi
+</h5>
 <?php
                           }
                           else{
                             ?>
-<span class="alert alert-danger">
-    oupss veuillez recommencer!!
-</span>
+<h5 class="alert alert-danger text-center" style="font-size:14px;">oupps modification echoué veuillez recommencer
+</h5>
 <?php
             }
 }
 }
 catch(PDOException $e){
     ?>
-<span class="alert alert-danger">
-    impossible d'effectuer cette operation pour le moment veuillez ressayer plus tard
-</span>
+<h5 class="alert alert-danger text-center" style="font-size:14px;">oupps revenez plus tard
+</h5>
 <?php
 }
 }

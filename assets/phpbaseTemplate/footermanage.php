@@ -57,6 +57,9 @@
 <script src="../vendor/wow/wow.min.js"></script>
 <script src="../js/theme.js"></script>
 <script src="../js/manipilation.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
     // Activate tooltip
@@ -430,6 +433,24 @@ $(document).ready(function() {
             },
             success: function(response) {
                 $('#showstatus' + idadoption).html(response);
+            }
+        });
+    })
+
+    //ce code sert a a modifier le status d'une demande d'adoption selon sa progression cote reference
+    $(document).on('click', '#updateDecision', function updateDecision() {
+
+        let $this = $(this).val();
+        let idadoption = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/referencedynamique.php",
+            data: {
+                idadoption: idadoption,
+                action: 1
+            },
+            success: function(response) {
+                $('#newtoold' + idadoption).html(response);
             }
         });
     })

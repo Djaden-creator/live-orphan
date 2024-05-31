@@ -2,12 +2,7 @@
     <span class="text-danger notification"></span>
     <thead>
         <tr>
-            <th>
-                <span class="custom-checkbox">
-                    <input type="checkbox" id="selectAll">
-                    <label for="selectAll"></label>
-                </span>
-            </th>
+
             <th>N° de Reference</th>
             <th>Demandeur</th>
             <th>Type</th>
@@ -40,12 +35,6 @@
                 ?>
     <tbody class="fetchrecord">
         <tr>
-            <td>
-                <span class="custom-checkbox">
-                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                    <label for="checkbox1"></label>
-                </span>
-            </td>
             <td><?php echo $rows['reference'];?></td>
             <td><?php echo $rows['name'];?></td>
             <?php

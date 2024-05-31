@@ -2,12 +2,6 @@
     <span class="text-danger notification"></span>
     <thead>
         <tr>
-            <th>
-                <span class="custom-checkbox">
-                    <input type="checkbox" id="selectAll">
-                    <label for="selectAll"></label>
-                </span>
-            </th>
             <th>Photo</th>
             <th>Name</th>
             <th>Age</th>
@@ -41,12 +35,6 @@
                 ?>
     <tbody>
         <tr>
-            <td>
-                <span class="custom-checkbox">
-                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                    <label for="checkbox1"></label>
-                </span>
-            </td>
             <td><img src="<?php echo $rows['photo']?>" alt="" style="height: 30px;width:30px;object-fit:contain;"></td>
             <td><?php echo $rows['nom']?></td>
             <td><?php echo $diff->format('%y'); ?> ans</td>

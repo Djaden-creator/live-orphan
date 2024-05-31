@@ -28,6 +28,29 @@
     <div class="card">
         <img src="<?php echo $rows['photos'] ?>" class="img-fluid"
             style="height: 150px;width: 100%; object-fit: container;" alt="...">
+        <?php
+              if($diff->format('%y') <= 6){
+                ?>
+        <span class="mai-star" title="youngest"
+            style="font-size:30px;position:relative;margin-top:-40px;color:#b37400;"></span>
+        <?php
+              }elseif($diff->format('%y') >6 && $diff->format('%y') <=10 ){
+                ?>
+        <span class="mai-arrow-up" title="younger"
+            style="font-size:40px;position:relative;margin-top:-40px;color:#b37400;"></span>
+        <?php
+              }elseif($diff->format('%y') >10 && $diff->format('%y') <=18){
+                ?>
+        <span class="mai-thunderstorm" title="young"
+            style="font-size:40px;position:relative;margin-top:-40px;color:#d94350;"></span>
+        <?php
+              }else{
+                ?>
+        <span class="mai-arrow-down" title="adult"
+            style="font-size:40px;position:relative;margin-top:-40px;color:#e69500;"></span>
+        <?php
+              }
+            ?>
         <div class="text-center" style="margin: 10px;">
             <h5 style="font-size: 12px;font-style: bold;"><?php echo $rows['name'] ?></h5>
             <h5 style="font-size: 12px;font-style: bold;"><?php echo $diff->format('%y'); ?> ans,
@@ -42,15 +65,18 @@
                 foreach($childd as $chilrow){
                     if($chilrow['decision']=='Rejeté'){
                         ?>
-            <a href="<?=$link2;?>" class="btn btn-danger" title="cet enfant est reprenable">disponible</a>
+            <a href="<?=$link2;?>" class="btn btn-danger" style="color:white;font-size:10px;"
+                title="cet enfant est reprenable">disponible</a>
             <?php
                     }elseif($chilrow['decision']=='Accepté'){
                         ?>
-            <button class="btn btn-success" style="color:white" title="cet enfant est deja adopté">Adopté</button>
+            <button class="btn btn-success" style="color:white;font-size:10px;"
+                title="cet enfant est deja adopté">Adopté</button>
             <?php
                     }elseif($chilrow['decision']=='encours'){
                         ?>
-            <button class="btn btn-warning" style="color:white" title="cet enfant est deja demandé">Demandé</button>
+            <button class="btn btn-warning" style="color:white;font-size:10px;"
+                title="cet enfant est deja demandé">Demandé</button>
             <?php
                     }
                 }
@@ -58,7 +84,8 @@
             <?php
                }else{
                 ?>
-            <a href="<?=$link2;?>" class="btn btn-primary" title="cet enfant est disponible">disponible</a>
+            <a href="<?=$link2;?>" class="btn btn-primary" style="color:white;font-size:10px;"
+                title="cet enfant est disponible">disponible</a>
             <?php
                }
             ?>

@@ -46,6 +46,10 @@
             </a>
             <a class="btn btn-primary" style="font-size:12px;" href="demande.php">
                 Gerer les demandes(
+                <?php require_once'../functions/adoptionClass.php';
+                  $adoptionClass= new Adoption();
+                  $adoptionClass->countdemandeAll();
+                ?>
                 )
             </a>
         </div>
@@ -64,6 +68,9 @@
                         <button class="btn btn-danger" id="deletealluser" data-toggle="modal"><i
                                 class="material-icons">&#xE15C;</i>
                             <span>Delete all users?</span></button>
+                        <a href="../pagesPhp/admin_add_user.php" class="btn btn-success"><i
+                                class="material-icons">&#xE15C;</i>
+                            <span>Add user</span></a>
                     </div>
                 </div>
             </div>
@@ -75,15 +82,9 @@
                     <span class="text-danger notification"></span>
                     <thead>
                         <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
                             <th>Name</th>
                             <th>Age</th>
-                            <th>status</th>
+                            <th>role</th>
                             <th>compte</th>
                             <th>Actions</th>
                             <th>Decision</th>

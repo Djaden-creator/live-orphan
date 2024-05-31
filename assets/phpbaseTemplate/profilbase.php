@@ -32,7 +32,8 @@
                                     <?php
                                             }else{
                                                 ?>
-                                    <button class="btn btn-outline-primary">help</button>
+                                    <a href="contact.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>"
+                                        class="btn btn-outline-primary">Need some help?</a>
                                     <?php
                                             }
                                         ?>
@@ -121,7 +122,7 @@
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-3">
+                                    <h6 class="d-flex align-items-center mb-3 showcountdelete">
                                         Vous avez <?php
                                           require_once'../functions/adoptionClass.php';
                                           $adoption= new Adoption();
@@ -141,58 +142,16 @@
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-3"><i
-                                            class="material-icons text-info mr-2">Demande</i>Status Terminé</h6>
-                                    <div class="bg-light p-2" style="border-radius:4px;">
-                                        <span style="font-size:12px;">nature:adoption</span>
-                                        <div style="display:flex; justify-content:space-between">
-                                            <small>Demande</small>
-                                            <small>statut:<b
-                                                    style="background-color:black;color:white;padding:2px;border-radius:5px;font-size:12px;">Accepté</b></small>
-                                            <small>progress: 100%</small>
-                                        </div>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%"
-                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <div style="display:flex;">
-                                            <button
-                                                style="background-color:black;border:none;outline:none; color:white;border-radius:4px;font-size:12px;">voir
-                                                detail
-                                            </button>
-                                        </div>
-                                        <div id="adoptedetail" style="padding:5px;">
-                                            <div class="bg-light"
-                                                style="padding:10px;border-radius:5px;font-size:12px;color:dark;">
-                                                <h1 style="font-size:12px;">demande fait il ya : 2 days</h1>
-                                                <h1 style="font-size:12px;">enfant : name here,10 ans</h1>
-                                                <h1 style="font-size:12px;">sex d'enfant: name here,pays:congo</h1>
-                                                <h1 style="font-size:12px;">parent foster : name here,10 ans</h1>
-                                                <button
-                                                    style="background-color:black;border:none;outline:none; color:white;border-radius:4px; font-size:12px;">close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <small>Website Markup</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%"
-                                            aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>One Page</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%"
-                                            aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Mobile Template</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
-                                            aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Backend API</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
-                                            aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    <!-- here les demandes termineés all fetch -->
+                                    <h6 class="d-flex align-items-center mb-3 showthecountofaccepted">Vous avez <?php
+                                          $adoption= new Adoption();
+                                          $adoption->countTerminédemande();
+                                        ?> <i class="material-icons text-info mr-2">demande(s) Termineé(s)</i>
+                                    </h6>
+                                    <?php
+                                          $adoption= new Adoption();
+                                          $adoption->getTerminé();
+                                        ?>
                                 </div>
                             </div>
                         </div>

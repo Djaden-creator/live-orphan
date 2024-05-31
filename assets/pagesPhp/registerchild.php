@@ -25,54 +25,53 @@
 </head>
 
 <body>
-    <div id="addEmployeeModal" class="fadeOut">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form method="post" enctype="multipart/form-data">
-                    <div class="modal-header bg-dark">
-                        <h4 class="modal-title" style="color:white;">Add a Child</h4>
-                        <a href="listofBabies.php"><button style="color: white;" type="button" class="close"
-                                data-dismiss="modal" aria-hidden="true">&times;</button></a>
-                    </div>
-                    <span>
-                        <?php
+    <!-- forme new way -->
+    <div class="page-section">
+        <div class="container">
+            <h1 class="text-center wow fadeInUp" style="font-size:17px;">
+                Register a new Child
+            </h1>
+            <form class="main-form" method="post" enctype="multipart/form-data">
+                <?php
                         session_start();
                            require_once '../functions/childClass.php';
                            $child= new babiesClass();
                            $child ->babies();
                         ?>
-                    </span>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Dob</label>
-                            <input type="date" name="date" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <select name="sex" id="departement" class="form-control">
-                                <option value="general">sex</option>
-                                <option value="Mr">Mr</option>
-                                <option value="Mrs">Mrs</option>
-                                <option value="bisex">bisex</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Pays</label>
-                            <input type="text" name="pays" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>photo</label>
-                            <input type="file" name="photo" class="form-control">
-                        </div>
+                <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+                    <a href="listofBabies.php" title="close"><button style="color: black;" type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control">
                     </div>
-                    <div class="modal-footer bg-dark">
-                        <input type="submit" name="saveit" class="btn btn-primary" value="Add">
+                    <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+                        <label>Dob</label>
+                        <input type="date" name="date" class="form-control">
                     </div>
-                </form>
-            </div>
+                    <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+                        <select name="sex" id="departement" class="form-control">
+                            <option value="general">sex</option>
+                            <option value="Mr">Mr</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="bisex">bisex</option>
+                        </select>
+                    </div>
+                    <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+                        <label>Pays</label>
+                        <input type="text" name="pays" class="form-control">
+                    </div>
+                    <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+                        <label>photo</label>
+                        <input type="file" name="photo" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 py-2 d-flex wow fadeInUp" data-wow-delay="300ms">
+                    <input type="submit" name="saveit" class="btn btn-primary" value="Add">
+                </div>
+            </form>
         </div>
     </div>
     <script src="../js/jquery-3.5.1.min.js"></script>

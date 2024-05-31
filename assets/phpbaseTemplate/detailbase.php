@@ -99,16 +99,16 @@
                 <div class="text-center" style="margin: 10px;">
                     <h5 style="font-size: 12px;font-style: bold;"><?php echo $rows['name'] ?></h5>
                     <h5 style="font-size: 12px;font-style: bold;">
-                        <?php echo $diff->format('%y'); ?>,<?php echo $rows['pays'] ?></h5>
+                        <?php echo $diff->format('%y'); ?> ans,<?php echo $rows['pays'] ?></h5>
 
-                    <button class="btn btn-primary">status:disponible</button>
+                    <button class="btn btn-primary" style="font-size:10px;">status:disponible</button>
                 </div>
             </div>
         </div>
         <div class="col-sm-6 mb-3 mb-sm-0">
             <div class="d-flex p-1" style="column-gap:8px;">
                 <span
-                    style="background-color: rgb(224, 221, 221); color: white;padding: 5px;font-size: 15px;border-radius: 10px;">
+                    style="background-color:rgb(101, 100, 100); color: white;padding: 5px;font-size: 15px;border-radius: 10px;">
                     age:<?php echo $diff->format('%y'); ?>
                 </span>
                 <span
@@ -128,7 +128,8 @@
             </p>
             <p style="font-size: 13px;color:rgb(78, 77, 77) ; padding: 10px 20px;">Enregistré il
                 ya:<?php echo timeAction($create); ?></p>
-            <button class="btn btn-primary" id="idchildhere" value="<?php echo $rows['idChild']; ?>">Adopter?</button>
+            <button class="btn btn-primary" id="idchildhere" style="font-size:10px;"
+                value="<?php echo $rows['idChild']; ?>">Adopter?</button>
             <!-- here the notification for adoption -->
             <div style="padding: 20px;" id="notificationforadoption<?php echo $rows['idChild']; ?>"></div>
             <!-- here the notification for adoption -->

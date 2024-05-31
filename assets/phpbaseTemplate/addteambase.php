@@ -1,13 +1,12 @@
 <div class="page-section">
     <div class="container">
         <h1 class="text-center wow fadeInUp">Add a New Employee</h1>
-
-        <form method="post" class="main-form" enctype="multipart/form-data">
-            <?php
+        <?php
             require_once '../functions/teamClass.php';
                $teamclass= new teamClass();
                $teamclass->teamAdd();
             ?>
+        <form method="post" class="main-form" enctype="multipart/form-data">
             <div class="row mt-5 ">
                 <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
                     <input type="text" name="name" class="form-control" placeholder="Full name">

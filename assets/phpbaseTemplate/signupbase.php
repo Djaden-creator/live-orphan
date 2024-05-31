@@ -31,7 +31,7 @@
                     </select>
                 </div>
                 <div class="col-12 col-sm-6 py-2 wow fadeInRight">
-                    <input type="text" name="tel" class="form-control" placeholder=" ex : +33-784606250">
+                    <input type="text" name="tel" class="form-control" placeholder=" ex : +33 8 14 52 63 96">
                     <?php if(isset($pretel)) echo  $pretel;?>
                     <?php if(isset($lentel)) echo  $lentel;?>
                     <?php if(isset($maxtel)) echo  $maxtel;?>
@@ -46,7 +46,7 @@
                 <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
                     <select name="objectif" id="departement" class="custom-select">
                         <option value="general">Objectif du compte</option>
-                        <option value="adopter">je veux adopter </option>
+                        <option value="adopter">je veux adopter</option>
                         <option value="financer">je veux financer</option>
                         <option value="plaisir">juste pour me familiariser</option>
                     </select>

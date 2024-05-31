@@ -47,8 +47,8 @@
             <a class="btn btn-primary" style="font-size:12px;" href="demande.php">
                 Gerer les demandes(
                 <?php require_once'../functions/adoptionClass.php';
-                 $adoption= new Adoption();
-                 $adoption->countadoptionRow();
+                  $adoptionClass= new Adoption();
+                  $adoptionClass->countdemandeAll();
                 ?>
                 )
             </a>
@@ -89,12 +89,6 @@
                     <span class="text-danger notification"></span>
                     <thead>
                         <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
                             <th>N° de Reference</th>
                             <th>Demandeur</th>
                             <th>Type</th>

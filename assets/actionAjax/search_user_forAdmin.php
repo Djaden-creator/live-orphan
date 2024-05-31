@@ -2,12 +2,6 @@
     <span class="text-danger notification"></span>
     <thead>
         <tr>
-            <th>
-                <span class="custom-checkbox">
-                    <input type="checkbox" id="selectAll">
-                    <label for="selectAll"></label>
-                </span>
-            </th>
             <th>Name</th>
             <th>Age</th>
             <th>status</th>
@@ -40,12 +34,6 @@
                 ?>
     <tbody class="fetchrecord" id="fulluser<?php echo $rows['idUser']?>">
         <tr>
-            <td>
-                <span class="custom-checkbox">
-                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                    <label for="checkbox1"></label>
-                </span>
-            </td>
             <td><?php echo $rows['name']?></td>
             <td><?php echo $diff->format('%y'); ?> ans</td>
             <?php

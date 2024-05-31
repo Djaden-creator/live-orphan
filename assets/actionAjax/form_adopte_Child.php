@@ -21,21 +21,23 @@ session_start();
     <div class="row">
         <input type="hidden" id="myiduser" value="<?php echo $_SESSION['idUser']; ?>">
         <div class="col-12 col-sm-6 py-2 wow fadeInLeft ">
-            <input type="text " id="myname" class="form-control " placeholder="Full name ">
+            <input type="text " id="myname" class="form-control " placeholder="ex:Eden kibelisa ">
         </div>
         <div class="col-12 col-sm-6 py-2 wow fadeInRight ">
-            <input type="email" id="myemail" class="form-control " placeholder="Email address.. ">
+            <input type="email" id="myemail" class="form-control " placeholder="ex:djaden@gmail.com ">
         </div>
         <div class="col-12 py-2 wow fadeInUp " data-wow-delay="300ms ">
-            <input type="text " id="mynumber" class="form-control " placeholder="Number.. ">
+            <input type="text " id="mynumber" class="form-control " placeholder="ex:+33 7 65 98 52 52">
         </div>
         <div class="col-12 py-2 wow fadeInUp " data-wow-delay="300ms ">
-            <textarea id="mymessage" class="form-control " rows="6 " placeholder="Enter message.. "></textarea>
+            <textarea id="mymessage" class="form-control " rows="3 " placeholder="Enter message.."></textarea>
         </div>
     </div>
-    <button class="btn btn-primary mt-3 wow zoomIn" id="solution" value="<?php echo $idchild;?>">Submit
+    <button class="btn btn-primary mt-3 wow zoomIn" id="solution" style="font-size: 10px;"
+        value="<?php echo $idchild;?>">Submit
         Request</button>
-    <span class="btn btn-danger mt-3 wow zoomIn" id="closemenow" value="<?php echo $idchild;?>">close</span>
+    <span class="btn btn-danger mt-3 wow zoomIn" id="closemenow" style="font-size: 10px;"
+        value="<?php echo $idchild;?>">close</span>
 </div>
 
 <?php

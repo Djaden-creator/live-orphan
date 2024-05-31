@@ -35,9 +35,33 @@
                 <div class="row">
                     <div class="col-sm-8 text-sm">
                         <div class="site-info">
-                            <a href="#"><span class="mai-call text-primary"></span> +00 123 4455 6666</a>
+                            <?php
+                            session_start();
+                    $dsn = 'mysql:host=localhost;dbname=orphelinat';
+                    $username = 'root';
+                    $password = getenv('');
+                try{
+                    $pdo = new PDO($dsn, $username, $password);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                     if(isset($_SESSION['idUser'])){
+                        $sql="SELECT * FROM users WHERE idUser=".$_SESSION['idUser']."";
+                        $stmt = $pdo->query($sql);
+                        $child = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            foreach($child as $rows){
+                        ?>
+                            <a
+                                href="assets/pagesPhp/profil.php?itsme=<?php echo md5($rows['idUser']);?>/<?php echo md5($_SESSION['name']);?>"><span
+                                    class="mai-person text-primary"><?php echo $_SESSION['name'];?></span></a>
                             <span class="divider">|</span>
-                            <a href="#"><span class="mai-mail text-primary"></span> mail@example.com</a>
+                            <a href=""><span class="mai-mail text-primary"><?php echo $rows['email']; ?></span></a>
+                            <?php
+                         }
+                        }
+                    }
+                         catch(PDOException $e){
+                              echo"no connection from the database";
+                         }
+                    ?>
                         </div>
                     </div>
                     <div class="col-sm-4 text-right text-sm">
@@ -57,18 +81,93 @@
 
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="#"><span class="text-primary">Live</span>-Orphan</a>
+                <?php
+                    $dsn = 'mysql:host=localhost;dbname=orphelinat';
+                    $username = 'root';
+                    $password = getenv('');
+                try{
+                    $pdo = new PDO($dsn, $username, $password);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                     if(isset($_SESSION['idUser'])){
+                       
+                        $sql="SELECT * FROM users WHERE idUser=".$_SESSION['idUser']."";
+                        $stmt = $pdo->query($sql);
+                        $child = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            foreach($child as $rows){
+                                ?>
+                <a class="navbar-brand"
+                    href="../../../one/index.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">Live</span>-Orphan</a>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="https://donate.stripe.com/test_aEU6oR1ah143fHa6oo">Donate</a>
+                    </li>
+                </ul>
+                <?php
+                            }
+                        }else{
+                            ?>
+                <a class="navbar-brand" href="../../../one/index.php"><span class="text-primary">Live</span>-Orphan</a>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="https://donate.stripe.com/test_aEU6oR1ah143fHa6oo">Donate</a>
+                    </li>
+                </ul>
+                <?php
+                        }
+                        
+                        }catch(PDOException $e){
+                                echo"no connection from the database";
+                           }
+                ?>
+                <?php
+                    $dsn = 'mysql:host=localhost;dbname=orphelinat';
+                    $username = 'root';
+                    $password = getenv('');
+                  try{
+                    $pdo = new PDO($dsn, $username, $password);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                     if(isset($_SESSION['idUser'])){
+                       
+                        $sql="SELECT * FROM users WHERE idUser=".$_SESSION['idUser']."";
+                        $stmt = $pdo->query($sql);
+                        $child = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            foreach($child as $rows){
+                               if($rows['idUser']==1){
+                                ?>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="assets/pagesPhp/allmessage.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">
+                            <span class="mai-chatbubble"
+                                style="background-color:brown;padding:5px 5px;border-radius: 15px;font-size:12px;color:white;">
+                                <?php
+                                require_once'assets/functions/messageClass.php';
+                                $clmessage= new message();
+                                $clmessage->countMess();
+                                ?>
+                            </span></a>
+                    </li>
+                </ul>
+                <?php
+                               }else{
+                                ?>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary"
+                            href="assets/pagesPhp/contact.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">Contact</a>
+                    </li>
 
-                <form action="#">
-                    <div class="input-group input-navbar">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="icon-addon1"><span class="mai-search"></span></span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Enter keyword.." aria-label="Username"
-                            aria-describedby="icon-addon1">
-                    </div>
-                </form>
+                </ul>
 
+                <?php
+                               }
+                            }
+                        }
+                        } catch(PDOException $e){
+                            echo"no connection from the database";
+                       }
+                               
+                ?>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupport"
                     aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -77,7 +176,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupport">
                     <ul class="navbar-nav ml-auto">
                         <?php
-                    session_start();
                     $dsn = 'mysql:host=localhost;dbname=orphelinat';
                     $username = 'root';
                     $password = getenv('');
@@ -93,34 +191,39 @@
                                 ?>
                         <li class="nav-item active">
                             <a class="nav-link"
-                                href="../../../one/index.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">Home</a>
+                                href="../../../one/index.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">HOME</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                                href="assets/pagesPhp/timeline.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">timeline</a>
+                                href="assets/pagesPhp/timeline.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">SHOP</a>
                         </li>
                         <?php
                           if($rows['idUser']==1){
                             ?>
                         <li class="nav-item">
                             <a class="nav-link"
-                                href="assets/pagesPhp/listofbabies.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">dash</a>
+                                href="assets/pagesPhp/listofbabies.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">DASHBOAD</a>
+                        </li>
+                        <?php
+                          }else{
+                            ?>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="assets/pagesPhp/messageUser_space.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">
+                                <span class="mai-chatbubble"
+                                    style="background-color:brown;padding:5px 5px;border-radius: 15px;font-size:12px;color:white;">
+                                    <?php
+                                require_once'assets/functions/messageClass.php';
+                                $clmessage= new message();
+                                $clmessage->countMessforUser();
+                                ?>
+                                </span></a>
                         </li>
                         <?php
                           }
                         ?>
-
-                        <li class="nav-item d-flex">
-                            <i class="fas fa-user" style="position: relative;top:10px;left:5px;"></i>
-                            <a class="nav-link"
-                                href="assets/pagesPhp/profil.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>"><?php echo $_SESSION['name'] ;?></a>
-                        </li>
                         <li class="nav-item">
-                            <a class="btn btn-dark ml-lg-3"
-                                href="assets/pagesPhp/contact.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">help!</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary ml-lg-3" href="assets/pagesPhp/logoutIndex.php">Logout</a>
+                            <a class="btn btn-primary ml-lg-3" href="assets/pagesPhp/logoutIndex.php">LOGOUT</a>
                         </li>
                         <?php
                             
@@ -129,22 +232,19 @@
                         else{
                             ?>
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Home</a>
+                            <a class="nav-link" href="../../../one/index.php">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="html/about.html">About Us</a>
+                            <a class="nav-link" href="html/about.html">ABOUT US</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="html/doctors.html">Doctors</a>
+                            <a class="nav-link" href="html/blog.html">NEWS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="html/blog.html">News</a>
+                            <a class="nav-link" href="html/contact.html">CONTACT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="html/contact.html">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary ml-lg-3" href="assets/pagesPhp/login.php">Login</a>
+                            <a class="btn btn-primary ml-lg-3" href="assets/pagesPhp/login.php">LOGIN</a>
                         </li>
                         <?php
                          }}

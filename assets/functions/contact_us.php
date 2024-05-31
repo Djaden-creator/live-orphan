@@ -14,69 +14,41 @@
            $email=$_POST['email'];
            $reference=$_POST['reference'];
            $message=$_POST['message'];
+
+           if(empty($name)){
+            $lengname='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
+            }
+            if(empty($email)){
+                $lengsmail='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
+            }
+            if(empty($reference)){
+                $lenref='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
+            }
+            if(empty($message)){
+                $lenmess='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
+            }
+           
           
 //1.security with regex for name
 // Check only letters; the regex searches for anything that isn't a plain letter
-if (preg_match('/^[a-zA-Z\s]+$/',$name)){
-    $pregname='<span class="text-success" style="font-size:12px;">Good name</span>';
-}else{
-$pregname='<span class="text-danger" style="font-size:12px;">only alphabet allowed</span>';
-}
-// Check a value is provided of name
-$len = strlen($name);
-if ($len == 0) {
-$lengstring='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
-}
-
-// Check the string is long to long for name
-if ($len >$max) {
-$maxlength='<span class="text-danger" style="font-size:12px;">
- le nom ne peut pas depasser '.$max.'characteur</span>';
+elseif (!preg_match('/^[a-zA-Z\s]+$/',$name)){
+    $pregname='<span class="text-danger" style="font-size:12px;">only alphabet allowed</span>';
 }
 //security regex for email adresse
-if(preg_match('/^[a-zA-Z\d\._]+@[a-zA-Z\d\._].[a-zA-Z\d\._]{2,}+$/',$email)){
-$pregmail='<span class="text-success" style="font-size:12px;">valide email</span>';
-}else{
-$pregmail='<span class="text-danger" style="font-size:12px;">invalid email</span>';
+elseif(!preg_match('/^[a-zA-Z\d\._]+@[a-zA-Z\d\._].[a-zA-Z\d\._]{2,}+$/',$email)){
+    $pregmail='<span class="text-danger" style="font-size:12px;">invalid email</span>';
 }
-// Check a value is provided of email
-$lenmail = strlen($email);
-if ($lenmail == 0) {
-$lengsmail='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
-}
-
-// Check the string is long to long for name
-if ($lenmail >40) {
-$maxmail='<span class="text-danger" style="font-size:12px;">email ne dois pas depasser 40 characteur</span>';
-}
-
-//security regex for number formation
-if(preg_match('/^[a-zA-Z\d]+$/',$reference)){
-    $preref='<span class="text-success" style="font-size:12px;">votre numero de reference est pas valide</span>';
-    }else{
-    $preref='<span class="text-danger" style="font-size:12px;">votre numero de reference n\'est pas valide</span>';
+//security regex for reference formation
+elseif(!preg_match('/^[a-zA-Z\d]+$/',$reference)){
+    $preref='<span class="text-danger" style="font-size:12px;">votre numero de reference n\'est pas valide il doit avoir 6 characters</span>';
     }
-    // Check a value is provided of tel
-    $lenref = strlen($reference);
-    if ($lenref == 0) {
-    $lenref='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
-    }
-    
-    // Check the string is long to long for name
-    if ($lenref >6) {
-    $maxref='<span class="text-danger" style="font-size:12px;">
-    votre numero de reference ne doit pas depasser 6 caracteres</span>';
+    $longreference = strlen($reference);
+    if ($longreference > 6) {
+    $longpass='<span class="text-danger" style="font-size:12px;">votre numero de reference n\'est pas valide il doit avoir 6 characters</span>';
     }
 //security regex for adresse formation
-if(preg_match('/^[a-zA-Z\d\._]+$/',$message)){
-    $premess='<span class="text-success" style="font-size:12px;">votre message est valide </span>';
-    }else{
+elseif(!preg_match('/^[a-zA-Z\d\s\._\W\w]+$/',$message)){
     $premess='<span class="text-danger" style="font-size:12px;">votre message n\'est pas valide</span>';
-    }
-    // Check a value is provided of tel
-    $lenmess = strlen($message);
-    if ($lenmess == 0) {
-    $lenmess='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
     }
     else{
        
@@ -92,10 +64,10 @@ if(preg_match('/^[a-zA-Z\d\._]+$/',$message)){
         
                   if($statement->execute()){
                     ?>
-<div class="alert alert-success" style="display:flex;justify-content:center;
+<div class="alert-success" style="display:flex;justify-content:center;
                                          align-items:center;
                                               border-radius:5px;padding:10px;">
-    <h5 style="color:black;font-size:18px">votre message a été envoyé avec succées</h5>
+    <h5 style="color:black;font-size:12px">votre message a été envoyé avec succées</h5>
 </div>
 <?php
                   }else{
@@ -103,7 +75,7 @@ if(preg_match('/^[a-zA-Z\d\._]+$/',$message)){
 <div style="background-color:#d94350;display:flex;justify-content:center;
                      align-items:center;
                           border-radius:5px;padding:10px 20px;">
-    <h5 style="color: #f2f2f2;font-size:18px">votre message n'a pas été envoyé</h5>
+    <h5 style="color: #f2f2f2;font-size:12px">votre message n'a pas été envoyé</h5>
 </div>
 <?php
                   }

@@ -25,6 +25,7 @@
                 </div>
             </div>
             <button type="submit" name="login" class="btn btn-primary mt-3 wow zoomIn">Connect</button>
+            <a href="../pagesPhp/signup.php" style="font-size: 12px;">create an account now</a>
         </form>
     </div>
 </div>

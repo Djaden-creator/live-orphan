@@ -1,37 +1,45 @@
 <div class="p-5">
     <div class="container">
         <div class="p-3">
-            <a class="btn btn-primary" href="listofbabies.php">les enfants
+            <a class="btn btn-primary" style="font-size:12px;" href="listofbabies.php">les enfants
                 (<?php require_once'../functions/childClass.php';
                 $child= new babiesClass();
                 $child->countchildRow();
                 ?>)
             </a>
-            <a class="btn btn-primary" href="listofUsers.php">
+            <a class="btn btn-primary" style="font-size:12px;" href="listofUsers.php">
                 Mes utilisateurs(<?php require_once'../functions/userClass.php';
                 $user= new User();
                 $user->countuserRow();
                 ?>)</a>
 
-            <a class="btn btn-primary" href="team.php">
+            <a class="btn btn-primary" style="font-size:12px;" href="team.php">
                 Mon Equipe(
                 <?php require_once'../functions/teamClass.php';
                   $teamclass= new teamClass();
                   $teamclass->countemployeRow();
                 ?>)
             </a>
-            <a class="btn btn-primary" href="service.php">
+            <a class="btn btn-primary" style="font-size:12px;" href="service.php">
                 Mes services(
                 <?php require_once'../functions/serviceClass.php';
                   $serviceclass= new serviceClass();
                   $serviceclass->countserviceRow()
                 ?>)
             </a>
-            <a class="btn btn-primary" href="temoignage.php">
+            <a class="btn btn-primary" style="font-size:12px;" href="temoignage.php">
                 Les temoignages(
                 <?php require_once'../functions/reviewClass.php';
                   $reviewclass= new reviewClass();
                   $reviewclass->countreviewRow();
+                ?>
+                )
+            </a>
+            <a class="btn btn-primary" style="font-size:12px;" href="demande.php">
+                Gerer les demandes(
+                <?php require_once'../functions/adoptionClass.php';
+                  $adoptionClass= new Adoption();
+                  $adoptionClass->countdemandeAll();
                 ?>
                 )
             </a>
@@ -72,12 +80,7 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
+
                             <th>N°</th>
                             <th>Name</th>
                             <th>Email</th>

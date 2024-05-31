@@ -145,96 +145,32 @@ echo "error";
 <!-- .liste of kids -->
 <div class="page-section">
     <div class="container">
-        <h1 class="text-center wow fadeInUp ">Latest News</h1>
+        <h1 class="text-center wow fadeInUp ">Latest Reviews</h1>
         <div class="row page-section">
-            <div class="col-sm-2 mb-3 mb-sm-0">
-                <div class="card">
-                    <img src="../img/doctors/doctor_1.jpg" class="img-fluid"
-                        style="height: 150px;width: 100%; object-fit: cover;" alt="...">
-                    <div class="text-center" style="margin: 10px;">
-                        <h5 style="font-size: 12px;font-style: bold;">Sandra,kiloko bolie</h5>
-                        <h5 style="font-size: 12px;font-style: bold;">age:10 ans,congo</h5>
-
-                        <a href="detail.html" class="btn btn-primary">disponible</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2 mb-3 mb-sm-0">
-                <div class="card">
-                    <img src="../img/afrca.jpg" class="img-fluid" style="height: 150px;width: 100%; object-fit: cover;">
-                    <div class="text-center" style="margin: 10px;">
-                        <h5 style="font-size: 12px;font-style: bold;">Sandra,kiloko bolie</h5>
-                        <h5 style="font-size: 12px;font-style: bold;">age:10 ans,congo</h5>
-
-                        <a href="#" class="btn btn-primary">indisponible</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2 mb-3 mb-sm-0">
-                <div class="card">
-                    <img src="../img/doctors/doctor_1.jpg" class="img-fluid"
-                        style="height: 150px;width: 100%; object-fit: cover;" alt="...">
-                    <div class="text-center" style="margin: 10px;">
-                        <h5 style="font-size: 12px;font-style: bold;">Sandra,kiloko bolie</h5>
-                        <h5 style="font-size: 12px;font-style: bold;">age:10 ans,congo</h5>
-
-                        <a href="#" class="btn btn-primary">disponible</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2 mb-3 mb-sm-0">
-                <div class="card">
-                    <img src="../img/afrca.jpg" class="img-fluid" style="height: 150px;width: 100%; object-fit: cover;">
-                    <div class="text-center" style="margin: 10px;">
-                        <h5 style="font-size: 12px;font-style: bold;">Sandra,kiloko bolie</h5>
-                        <h5 style="font-size: 12px;font-style: bold;">age:10 ans,congo</h5>
-
-                        <a href="#" class="btn btn-primary">indisponible</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2 mb-3 mb-sm-0">
-                <div class="card">
-                    <img src="../img/doctors/doctor_1.jpg" class="img-fluid"
-                        style="height: 150px;width: 100%; object-fit: cover;" alt="...">
-                    <div class="text-center" style="margin: 10px;">
-                        <h5 style="font-size: 12px;font-style: bold;">Sandra,kiloko bolie</h5>
-                        <h5 style="font-size: 12px;font-style: bold;">age:10 ans,congo</h5>
-
-                        <a href="#" class="btn btn-primary">disponible</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2 mb-3 mb-sm-0">
-                <div class="card">
-                    <img src="../img/afrca.jpg" class="img-fluid" style="height: 150px;width: 100%; object-fit: cover;">
-                    <div class="text-center" style="margin: 10px;">
-                        <h5 style="font-size: 12px;font-style: bold;">Sandra,kiloko bolie</h5>
-                        <h5 style="font-size: 12px;font-style: bold;">age:10 ans,congo</h5>
-
-                        <a href="#" class="btn btn-primary">indisponible</a>
-                    </div>
-                </div>
-            </div>
-
+            <!-- here to fetch the reviews -->
+            <?php
+             require_once '../functions/reviewClass.php';
+             $review= new reviewClass();
+             $review->getReviewall();
+            ?>
         </div>
     </div>
 </div>
 
 <!-- .list of kids -->
 
-<div class="page-section banner-home bg-image " style="background-image: url(../assets/img/banner-pattern.svg); ">
+<div class="page-section banner-home bg-image " style="background-image: url(../img/banner-pattern.svg); ">
     <div class="container py-5 py-lg-0 ">
         <div class="row align-items-center ">
             <div class="col-lg-4 wow zoomIn ">
                 <div class="img-banner d-none d-lg-block ">
-                    <img src="assets/img/mobile_app.png " alt=" ">
+                    <img src="../img/mobile_app.png " alt=" ">
                 </div>
             </div>
             <div class="col-lg-8 wow fadeInRight ">
                 <h1 class="font-weight-normal mb-3 ">Get easy access of all features using One Health Application</h1>
-                <a href="# "><img src="assets/img/google_play.svg " alt=" "></a>
-                <a href="# " class="ml-2 "><img src="assets/img/app_store.svg " alt=" "></a>
+                <a href="# "><img src="../img/google_play.svg " alt=" "></a>
+                <a href="# " class="ml-2 "><img src="../img/app_store.svg " alt=" "></a>
             </div>
         </div>
     </div>

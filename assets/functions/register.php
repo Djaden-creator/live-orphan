@@ -1,4 +1,5 @@
 <?php
+//user self registration
         $dsn = 'mysql:host=localhost;dbname=orphelinat';
         $username = 'root';
         $password = getenv('');
@@ -30,9 +31,7 @@
            }
 //1.security with regex for name
 // Check only letters; the regex searches for anything that isn't a plain letter
-if (preg_match('/^[a-zA-Z\s]+$/',$name)){
-    $pregname='<span class="text-success" style="font-size:12px;">Good name</span>';
-}else{
+if (!preg_match('/^[a-zA-Z\s]+$/',$name)){
 $pregname='<span class="text-danger" style="font-size:12px;">only alphabet allowed</span>';
 }
 // Check a value is provided of name
@@ -47,9 +46,7 @@ $maxlength='<span class="text-danger" style="font-size:12px;">
  le nom ne peut pas depasser '.$max.'characteur</span>';
 }
 //security regex for email adresse
-if(preg_match('/^[a-zA-Z\d\._]+@[a-zA-Z\d\._].[a-zA-Z\d\._]{2,}+$/',$email)){
-$pregmail='<span class="text-success" style="font-size:12px;">valide email</span>';
-}else{
+if(!preg_match('/^[a-zA-Z\d\._]+@[a-zA-Z\d\._].[a-zA-Z\d\._]{2,}+$/',$email)){
 $pregmail='<span class="text-danger" style="font-size:12px;">invalid email</span>';
 }
 // Check a value is provided of email
@@ -64,11 +61,9 @@ $maxmail='<span class="text-danger" style="font-size:12px;">email ne dois pas de
 }
 
 //security regex for number formation
-if(preg_match('/^[+][\d]{2}[-][\d]{9}$/',$tel)){
-    $pretel='<span class="text-success" style="font-size:12px;">valide numero</span>';
-    }else{
-    $pretel='<span class="text-danger" style="font-size:12px;">invalid number</span>';
-    }
+if (!preg_match('/^(?:\+33\s|d)[1-9](?:\s\d{2}){4}$/',$tel)){
+    $pretel='<span class="text-danger" style="font-size:12px;">votre numero doit commencer par +33 et des espaces apres deux chifres ex:+33 1 25 63 96 96  avoir que de chiffres</span>';
+}
     // Check a value is provided of tel
     $lentel = strlen($tel);
     if ($lentel == 0) {
@@ -80,9 +75,7 @@ if(preg_match('/^[+][\d]{2}[-][\d]{9}$/',$tel)){
     $maxtel='<span class="text-danger" style="font-size:12px;">le numero ne doit pas depasser 15 chiffre</span>';
     }
 //security regex for adresse formation
-if(preg_match('/^[\d]+[\s][a-zA-Z\s]+[\d]{5}$/',$adresse)){
-    $preadress='<span class="text-success" style="font-size:12px;">valide adresse</span>';
-    }else{
+if(!preg_match('/^[\d]+[\s][a-zA-Z\s]+[\d]{5}$/',$adresse)){
     $preadress='<span class="text-danger" style="font-size:12px;">invalid adresse</span>';
     }
     // Check a value is provided of tel
@@ -97,9 +90,7 @@ if(preg_match('/^[\d]+[\s][a-zA-Z\s]+[\d]{5}$/',$adresse)){
     }
 
     //security regex for password formation
-if(preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password)){
-    $validpass='<span class="text-success" style="font-size:12px;">valide mot de pass</span>';
-    }else{
+if(!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password)){
     $invalipass='<span class="text-danger" style="font-size:12px;">
     le mot de passe doit avoir au moin un characteur en maj,miniscule,one number,un special characteur!@\|
     </span>';
@@ -133,7 +124,7 @@ if(preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/"
             ?>
 <div class="btn btn-primary" style="display:flex;justify-content:center; align-items:center;
             border-radius:5px;padding:10px 20px;">
-    <h5 style="color: #f2f2f2;font-size:18px">
+    <h5 style="color: #f2f2f2;font-size:12px">
         desolé cet nom existe deja
     </h5>
 </div>
@@ -143,15 +134,15 @@ if(preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/"
             ?>
 <div style="background-color:#d94350;display:flex;justify-content:center; align-items:center;
             border-radius:5px;padding:10px 20px;">
-    <h5 style="color: #f2f2f2;font-size:18px">
+    <h5 style="color: #f2f2f2;font-size:12px">
         cet adress email est pris trouvez un autre
     </h5>
 </div>
 <?php
         }else{
                  $sql="INSERT INTO `users`(`name`, `email`, `dbd`, `sex`, `portable`, `adresse`, `objectif`, `password`,
-                  `enregistre`, `niveau_du_compte`,`username`)
-                  VALUES (:name,:email,:dob,:sex,:tel,:adresse,:objectif, :password_hash, NOW(),'active','none')";
+                  `enregistre`, `niveau_du_compte`,`username`,`role`)
+                  VALUES (:name,:email,:dob,:sex,:tel,:adresse,:objectif, :password_hash, NOW(),'active','none','utilisateur')";
                  
                    $statement=$pdo->prepare($sql);
                    $statement->bindParam(':name',$name);
@@ -171,7 +162,7 @@ if(preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/"
 <div style="background-color:#d94350;display:flex;justify-content:center;
                      align-items:center;
                           border-radius:5px;padding:10px 20px;">
-    <h5 style="color: #f2f2f2;font-size:18px">l'enregistrement a echoué</h5>
+    <h5 style="color: #f2f2f2;font-size:12px">l'enregistrement a echoué</h5>
 </div>
 <?php
                   }
@@ -183,3 +174,5 @@ if(preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/"
 catch(PDOException $e){
 echo"echec" .$e->getMessage();
 }
+    
+       

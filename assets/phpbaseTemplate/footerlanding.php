@@ -1,4 +1,4 @@
-<footer class="page-footer">
+<footer class="page-footer mt-5">
     <div class="container">
         <div class="row px-md-3">
             <div class="col-sm-6 col-lg-3 py-3">
@@ -62,6 +62,8 @@
 <script src="assets/js/theme.js"></script>
 <script src="../js/manipilation.js"></script>
 <script src="assets/js/manipilation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
     //to make a search in the search bar
@@ -355,7 +357,6 @@ $(document).ready(function() {
                 solution: 1
             },
             success: function(response) {
-                $('#closethetagform').html("");
                 $('#notificationforadoption' + myidchild).html(response);
 
             }
@@ -378,6 +379,57 @@ $(document).ready(function() {
             }
         });
     })
+    //this code is to count dynamically the number of the demande of adopting a child for a particular user after deleting one by one:
+    $(document).on('click', '.deleteadopt', function deleteadoptcouting() {
+        let iddemande = $(this).val();
+        let usersessionid = $('#usersessionid').val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/countdemande_dynamique.php",
+            data: {
+                iddemande: iddemande,
+                usersessionid: usersessionid,
+                action: 1
+            },
+            success: function(response) {
+                $('.showcountdelete').html(response);
+            }
+        });
+    })
+
+    //this code is to delete the demande terminer for a particular user deleting one by one:
+    $(document).on('click', '#deletedemandeaccepted', function deletedemandeaccepted() {
+        let iddemande = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/delete_demande_adoption_accepted.php",
+            data: {
+                iddemande: iddemande,
+                action: 1
+            },
+            success: function(response) {
+                $('#hitherecloseme' + iddemande).html("");
+            }
+        });
+    })
+    //this code is to count dynamically the number of the demande terminer for a particular user after deleting one by one:
+    $(document).on('click', '.deletedemandeaccepted', function deletedemandeaccepteddeux() {
+        let iddemande = $(this).val();
+        let usersessionid = $('#usersessionid').val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/showcountdemandeaccepted_dynamique.php",
+            data: {
+                iddemande: iddemande,
+                usersessionid: usersessionid,
+                action: 1
+            },
+            success: function(response) {
+                $('.showthecountofaccepted').html(response);
+            }
+        });
+    })
+
 
     //this code is to show the detail of an adoption:
     $(document).on('click', '#clickonme', function clickonme() {
@@ -411,6 +463,123 @@ $(document).ready(function() {
             },
             success: function(response) {
                 $('#adoptedetail' + iddemande).html("");
+            }
+        });
+    })
+
+    //this code is for admin message to click on a particular message and to show it on the other side:
+    $(document).on('click', '.clickonAmessage', function clickonAmessage() {
+        let user_id = $(this).val();
+        let idmessage = $('#idmessage').val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/clickon_Amessage.php",
+            data: {
+                idmessage: idmessage,
+                user_id: user_id,
+                save: 1
+            },
+            success: function(response) {
+                $('#messagedetail').html(response);
+            }
+        });
+    })
+    //this code sert a un admin to show the form  a un message particulier d'un client it shows the form:
+    $(document).on('click', '#satisfaction', function satisfaction() {
+        let idmessage = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/showreplyuser_form.php",
+            data: {
+                idmessage: idmessage,
+                save: 1
+            },
+            success: function(response) {
+                $('#showformreplyuser' + idmessage).html(response);
+            }
+        });
+    })
+
+    //this code sert a un admin de close a form of replying a user particulier d'un client it closes the form:
+    $(document).on('click', '#satisfactionclose', function satisfactionclose() {
+        let idmessage = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/showreplyuser_form.php",
+            data: {
+                idmessage: idmessage,
+                save: 1
+            },
+            success: function(response) {
+                $('#showformreplyuser' + idmessage).html("");
+            }
+        });
+    })
+
+    //counting dynamically the number of unread message for the admin in message of users:
+    $(document).on('click', '#satisfactionsend', function satisfactionsend() {
+        let idmessage = $(this).val();
+        let usersender = $('#usersender').val();
+        let ecrire = $('#ecrire').val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/replying_Amessage.php",
+            data: {
+                idmessage: idmessage,
+                usersender: usersender,
+                ecrire: ecrire,
+                save: 1
+            },
+            success: function(response) {
+                $('#tall' + idmessage).html(response);
+            }
+        });
+    })
+    //count dynamicaly the number of message unread for a paticular user
+    $(document).on('click', '.satisfactioncount', function satisfactioncount() {
+        let idmessage = $(this).val();
+        let usersender = $('#usersender').val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/counting_dynamically_unreadmessage.php",
+            data: {
+                idmessage: idmessage,
+                usersender: usersender,
+                save: 1
+            },
+            success: function(response) {
+                $('#numbermessage' + usersender).html(response);
+            }
+        });
+    })
+    //voir la reponse sur un message coté admin:
+    $(document).on('click', '.voirmareponse', function voirmareponse() {
+        let idmessage = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/admin_va_voir_sareponse_sur_unmessage.php",
+            data: {
+                idmessage: idmessage,
+                save: 1
+            },
+            success: function(response) {
+                $('#voirreponse' + idmessage).html(response);
+            }
+        });
+    })
+
+    //voir la reponse sur un message coté admin close that reponse:
+    $(document).on('click', '.closemareponse', function closemareponsee() {
+        let idmessage = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/admin_va_voir_sareponse_sur_unmessage.php",
+            data: {
+                idmessage: idmessage,
+                save: 1
+            },
+            success: function(response) {
+                $('#voirreponse' + idmessage).html("");
             }
         });
     })

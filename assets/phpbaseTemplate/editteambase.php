@@ -1,12 +1,12 @@
 <div class="page-section">
     <div class="container">
         <h1 class="text-center wow fadeInUp">Edit Employee</h1>
-        <form method="post" class="main-form">
-            <?php
+        <?php
              require_once '../functions/teamClass.php';
              $teamclass= new teamClass();
              $teamclass->editEmploye();
              ?>
+        <form method="post" class="main-form">
             <?php
                $id=$_GET['yourskin'];
                $data=$_GET['yourskin']=base64_decode((urldecode($id)));

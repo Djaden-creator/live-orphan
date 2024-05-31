@@ -26,12 +26,6 @@ public function getReview(){
 ?>
 <tbody>
     <tr>
-        <td>
-            <span class="custom-checkbox">
-                <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                <label for="checkbox1"></label>
-            </span>
-        </td>
         <td><?php echo $rows['idreview']?></td>
         <td><?php echo $rows['name']?></td>
         <td><?php echo $rows['email']?></td>
@@ -70,6 +64,165 @@ catch(PDOException $e){
     echo"error",$e ->getMessage();
 }
 }
+
+public function getReviewall(){
+    $dsn = 'mysql:host=localhost;dbname=orphelinat';
+    $username = 'root';
+    $password = getenv('');
+
+    try{
+        $pdo = new PDO($dsn, $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //getting all data from the database
+        $query = "SELECT * FROM reviews order by idreview desc";
+        $stmt = $pdo->query($query);
+        $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        //Afficher les utilisateurs
+        if($reviews){
+            date_default_timezone_set('Europe/Paris');
+            function timetoget($timeto){
+                $time_ago=strtotime($timeto);
+                $current_time=time();
+                $time_difference=$current_time -$time_ago;
+                $seconds=$time_difference;
+                $minutes=round($seconds /60); // value 60 is seconds
+                $hours=round($seconds /3600); // value 3600 is 60 mi
+                $days=round($seconds /86400);// 86400=24*60*60
+                $weeks=round($seconds /604800);//7*24*60*60;
+                $months=round($seconds /2629440); //(365+365+365+365)/5/12
+                $years=round($seconds /31553280);
+                  if($seconds <=60){
+                      return "just now";
+                  }
+                else if($minutes <=60){
+                  if($minutes==1){
+                      return "one minute ago";
+                  }else{
+                      return "$minutes minutes a go";
+              
+                  }
+                }
+                else if($hours <=24){
+                  if($hours==1){
+                      return "an hour ago";
+                  }else{
+                      return "$hours hours ago";
+              
+                  }
+                }
+                else if($days <=7){
+                  if($days==1){
+                      return "yesterday";
+                  }else{
+                      return "$days days ago";
+              
+                  }
+                }
+                //4.3 ==52/12 
+                else if($weeks <=4.3){
+                  if($weeks==1){
+                      return "a week ago";
+                  }else{
+                      return "$weeks weeks ago";
+              
+                  }
+                }
+                else if($months <=12){
+                  if($months==1){
+                      return "a month ago";
+                  }else{
+                      return "$months months ago";
+              
+                  }
+                }
+                else{
+                  if($years==1){
+                      return "one year ago";
+                  }else{
+                      return "$years years ago";
+                  }
+                } 
+            }
+            foreach($reviews as $rows){
+                $timeto=$rows['create_at'];
+                $string=strip_tags($rows['description']);
+                if(strlen($string)>55):
+                $stringcut=substr($string,0,100);
+                $endpoint=strrpos($stringcut,' ');
+                $string=$endpoint?substr($stringcut,0,$endpoint):substr($stringcut,0);
+                $string.='...';
+                endif;
+                ?>
+<?php
+    $id=$rows['idreview'];
+    $encrypte_1=(($id));
+    $link="review_detail.php?itsmyraview=".urlencode(base64_encode($encrypte_1));
+?>
+<div class="col-sm-4 mb-3 mb-sm-0">
+    <div class="card text-bg-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header"><small>temoignage il ya : <?php echo timetoget($timeto); ?></small></div>
+        <div class="card-body">
+            <small class="card-title" style="font-size:12px;">Par: <?php echo $rows['name']; ?></small>
+            <?php
+            if($rows['note']==1){
+                ?>
+            <span>
+                <small class="btn btn-danger" style="font-size:10px;">note: <?php echo $rows['note']; ?>/5</small>
+                <span>Motion: 20% fake opinion</span>
+            </span>
+            <?php
+               }elseif($rows['note']==2){
+                ?>
+            <span>
+                <small class="btn btn-danger" style="font-size:10px;">note: <?php echo $rows['note']; ?>/5</small>
+                <span>Motion: 40% bad</span>
+            </span>
+            <?php
+               }elseif($rows['note']==3){
+                ?>
+            <span>
+                <small class="btn btn-success" style="font-size:10px;">note: <?php echo $rows['note']; ?>/5</small>
+                <span>Motion: 60% good</span>
+            </span>
+            <?php
+               }elseif($rows['note']==4){
+                ?>
+            <span>
+                <small class="btn btn-success" style="font-size:10px;">note: <?php echo $rows['note']; ?>/5</small>
+                <span>Motion: 80% very good</span>
+            </span>
+            <?php
+               }else{
+                ?>
+            <span>
+                <small class="btn btn-success" style="font-size:10px;">note: <?php echo $rows['note']; ?>/5</small>
+                <span>Motion: 100% excellent</span>
+            </span>
+            <?php
+               }
+               ?>
+            <p class="card-text" style="font-size:14px;">
+                <?php echo $string;?>
+            </p>
+        </div>
+        <div class="card-footer">
+            <a href="<?php echo $link; ?>" class="btn btn-info" style="font-size:12px;">lire more</a>
+        </div>
+    </div>
+</div>
+<?php
+             }
+        }else{
+            echo"no data found in the system";
+        }
+      
+}
+catch(PDOException $e){
+    echo"error",$e ->getMessage();
+}
+}
+
 //delete a particular temoignage in the datebase
 public function deleteReviews(){
     $dsn = 'mysql:host=localhost;dbname=orphelinat';

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+    <title>edit children</title>
     <link rel="stylesheet" href="../css/tableBabies.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -41,55 +41,66 @@
         if($users){
             foreach($users as $rows){
                         ?>
-    <div id="addEmployeeModal" class="fadeOut">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form method="post" enctype="multipart/form-data">
-                    <div class="modal-header bg-dark">
-                        <h4 class="modal-title" style="color:white;">Edit this Child</h4>
-                        <a href="listofBabies.php"><button style="color: white;" type="button" class="close"
-                                data-dismiss="modal" aria-hidden="true">&times;</button></a>
-                    </div>
-                    <span>
-                        <?php
+    <div class="page-section">
+        <div class="container">
+            <h1 class="text-center wow fadeInUp" style="font-size:17px;">Vous allez modifier <?php echo $rows['name']?>
+            </h1>
+            <form class="main-form" method="post" enctype="multipart/form-data">
+                <?php
                         session_start();
                            require_once '../functions/childClass.php';
                            $child= new babiesClass();
                            $child ->editChild();
+                           $child ->editChildpicture();
                         ?>
-                    </span>
-                    <div class="modal-body">
+                <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+                    <a href="listofBabies.php" title="close"><button style="color: black;" type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
                         <input type="hidden" name="getme" value="<?php echo $id;?>">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" value="<?php echo $rows['name']?>">
-                        </div>
-                        <div class="form-group">
-                            <label>Dob</label>
-                            <input type="date" name="date" class="form-control" value="<?php echo $rows['date']?>">
-                        </div>
-                        <div class="form-group">
-                            <select name="sex" id="departement" class="form-control">
-                                <option value="general">sex</option>
-                                <option value="Mr">Mr</option>
-                                <option value="Mrs">Mrs</option>
-                                <option value="bisex">bisex</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Pays</label>
-                            <input type="text" name="pays" class="form-control" value="<?php echo $rows['pays']?>">
-                        </div>
-                        <div class="form-group">
-                            <label>photo</label>
-                            <input type="file" name="photo" class="form-control" value="<?php echo $rows['photos']?>">
-                        </div>
+
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control" value="<?php echo $rows['name']?>">
+
                     </div>
-                    <div class="modal-footer bg-dark">
-                        <input type="submit" name="editit" class="btn btn-primary" value="Edit">
+                    <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+
+                        <label>Dob</label>
+                        <input type="date" name="date" class="form-control" value="<?php echo $rows['date']?>">
+
                     </div>
-                </form>
+                    <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+
+                        <select name="sex" id="departement" class="form-control">
+                            <option value="general"><?php echo $rows['sex'];?></option>
+                            <option value="Mr">Mr</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="bisex">bisex</option>
+                        </select>
+
+                    </div>
+                    <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+
+                        <label>Pays</label>
+                        <input type="text" name="pays" class="form-control" value="<?php echo $rows['pays']?>">
+
+                    </div>
+                </div>
+                <div class="col-12 py-2 d-flex wow fadeInUp" data-wow-delay="300ms">
+                    <input type="submit" name="editit" class="btn-primary" style="font-size: 12px;border-radius:4px;"
+                        value="Edit">&nbsp;
+                    <input type="hidden" id="childid" value="<?php echo $id;?>">
+                    <small class="btn-primary childpicture"
+                        style="font-size: 12px;border-radius:4px;padding:3px;">modifier sa
+                        photo?</small>
+                </div>
+            </form>
+            <div id="showpictureformchild<?php echo $id;?>">
+                <!-- here the form of update picture -->
             </div>
+
         </div>
     </div>
     <?php
@@ -105,6 +116,40 @@
     <script src="../vendor/wow/wow.min.js"></script>
     <script src="../js/theme.js"></script>
     <script src="../js/passwords.js"></script>
+    <script>
+    //here to edit a child picture form opener
+    $(document).on('click', '.childpicture', function childpictureedit() {
+        let childid = $('#childid').val();
+        $.ajax({
+            method: 'POST',
+            url: "../actionAjax/formedit_child_pciture.php",
+            data: {
+                childid: childid,
+                save: 1
+            },
+            success: function(response) {
+                $('#showpictureformchild' + childid).html(response);
+            }
+        })
+    })
+
+    //here to close the edit a child picture form close
+    $(document).on('click', '#closepictureform', function closepictureform() {
+        event.preventDefault();
+        let childid = $('#childid').val();
+        $.ajax({
+            method: 'POST',
+            url: "../actionAjax/formedit_child_pciture.php",
+            data: {
+                childid: childid,
+                save: 1
+            },
+            success: function(response) {
+                $('#showpictureformchild' + childid).html("");
+            }
+        })
+    })
+    </script>
 </body>
 
 </html>

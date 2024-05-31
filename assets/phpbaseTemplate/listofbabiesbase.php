@@ -48,6 +48,10 @@
             <a class="btn btn-primary" style="font-size:12px;"
                 href="demande.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">
                 Gerer les demandes(
+                <?php require_once'../functions/adoptionClass.php';
+                  $adoptionClass= new Adoption();
+                  $adoptionClass->countdemandeAll();
+                ?>
                 )
             </a>
         </div>
@@ -80,12 +84,6 @@
                     <span class="text-danger notification"></span>
                     <thead>
                         <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
                             <th>photo</th>
                             <th>Name</th>
                             <th>Age</th>
