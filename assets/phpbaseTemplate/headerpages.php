@@ -132,7 +132,7 @@
                         $stmt = $pdo->query($sql);
                         $child = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             foreach($child as $rows){
-                               if($rows['idUser']==1){
+                               if($rows['role']=='secretaire'){
                                 ?>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -184,14 +184,14 @@
                                 href="../pagesPhp/timeline.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">SHOP</a>
                         </li>
                         <?php
-                          if($rows['idUser']==1){
+                          if($rows['role']=='administrateur' ||$rows['role']=='moderateur'){
                             ?>
                         <li class="nav-item">
                             <a class="nav-link"
                                 href="../pagesPhp/listofbabies.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">DASHBOARD</a>
                         </li>
                         <?php
-                          }else{
+                          }elseif($rows['role']=='utilisateur'){
                             ?>
                         <li class="nav-item">
                             <a class="nav-link"

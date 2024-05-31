@@ -26,11 +26,23 @@
                                     <p class="text-muted font-size-sm"><?php echo $diff->format('%y%');?> ans,
                                         <?php echo $rows['adresse'] ?></p>
                                     <?php
-                                            if($rows['idUser']==1){
+                                            if($rows['role']=='moderateur'){
                                                 ?>
-                                    <button class="btn btn-primary">Admin</button>
+                                    <button class="btn btn-primary">Moderateur</button>
                                     <?php
-                                            }else{
+                                            }
+                                            elseif($rows['role']=='administrateur'){
+                                                ?>
+                                    <button class="btn btn-primary">Administrateur</button>
+                                    <?php
+                                            }
+                                            elseif($rows['role']=='secretaire'){
+                                                ?>
+                                    <button class="btn btn-primary">Secretaire</button>
+                                    <?php
+                                            }
+                                            
+                                            else{
                                                 ?>
                                     <a href="contact.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>"
                                         class="btn btn-outline-primary">Need some help?</a>

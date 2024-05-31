@@ -71,7 +71,7 @@ create_at datetime,
 status varchar(20),
 reference varchar(20),
 decision varchar(20),
-PRIMARY KEY(idAdoption)   
+PRIMARY KEY(idAdoption)
 )
 
 // nous pouvons enregistrer les nouvelles demandes  dans la base de donnéé:
@@ -138,7 +138,7 @@ PRIMARY KEY(id)
 //cette table sauvegarde les temoignages des utilisateur sur la plateforme liveorphan
 
 CREATE TABLE reviews(
-idreview int(11) AUTO_INCREMENT,,
+idreview int(11) AUTO_INCREMENT,
 name  varchar(50), 
 email varchar(50),
 note int(10),

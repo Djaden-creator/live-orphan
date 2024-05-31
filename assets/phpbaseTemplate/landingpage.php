@@ -274,7 +274,7 @@
 
 <div class="page-section">
     <div class="container">
-        <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
+        <h1 class="text-center wow fadeInUp">Give our Plateforme a Note!</h1>
         <div id="review_notification" style="display:flex;justify-content:center;">
 
         </div>

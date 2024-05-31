@@ -10,6 +10,21 @@
             <span style="padding: 10px 20px; font-size: 15px;" id="countitnow"></span>
         </div>
         <div class="p-3" style="display:flex;column-gap:5px;font-size:12px;">
+            <?php
+        $dsn = 'mysql:host=localhost;dbname=orphelinat';
+        $username = 'root';
+        $password = getenv('');
+    try{
+        $pdo = new PDO($dsn, $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         if(isset($_SESSION['idUser'])){
+           
+            $sql="SELECT * FROM users WHERE idUser=".$_SESSION['idUser']."";
+            $stmt = $pdo->query($sql);
+            $child = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach($child as $rows){
+                    if($rows['role']=='administrateur'){
+                        ?>
             <a class="btn btn-primary" style="font-size:12px;" href="listofbabies.php">les enfants
                 (<?php require_once'../functions/childClass.php';
                 $child= new babiesClass();
@@ -36,7 +51,8 @@
                   $serviceclass->countserviceRow()
                 ?>)
             </a>
-            <a class="btn btn-primary" style="font-size:12px;" href="temoignage.php">
+            <a class="btn btn-primary" style="font-size:12px;"
+                href="temoignage.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">
                 Les temoignages(
                 <?php require_once'../functions/reviewClass.php';
                   $reviewclass= new reviewClass();
@@ -44,7 +60,8 @@
                 ?>
                 )
             </a>
-            <a class="btn btn-primary" style="font-size:12px;" href="demande.php">
+            <a class="btn btn-primary" style="font-size:12px;"
+                href="demande.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">
                 Gerer les demandes(
                 <?php require_once'../functions/adoptionClass.php';
                   $adoptionClass= new Adoption();
@@ -52,6 +69,36 @@
                 ?>
                 )
             </a>
+            <?php
+
+                    }elseif($rows['role']=='moderateur'){
+              ?>
+            <a class="btn btn-primary" style="font-size:12px;" href="listofbabies.php">les enfants
+                (<?php require_once'../functions/childClass.php';
+                $child= new babiesClass();
+                $child->countchildRow();
+                ?>)
+            </a>
+
+            <a class="btn btn-primary" style="font-size:12px;"
+                href="demande.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">
+                Gerer les demandes(
+                <?php require_once'../functions/adoptionClass.php';
+                  $adoptionClass= new Adoption();
+                  $adoptionClass->countdemandeAll();
+                ?>
+                )
+            </a>
+
+            <?php
+                    }
+                    ?>
+
+            <?php
+                }}} catch(PDOException $e){
+                    echo"no connection from the database";
+               }
+        ?>
         </div>
     </div>
 

@@ -92,7 +92,7 @@
                         $stmt = $pdo->query($sql);
                         $child = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             foreach($child as $rows){
-                               if($rows['idUser']==1){
+                               if($rows['role']=='secretaire'){
                                 ?>
                 <a class="navbar-brand"
                     href="../../../one/index.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">Live</span>-Orphan</a>
@@ -157,7 +157,7 @@
                                 href="../pagesPhp/timeline.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">SHOP</a>
                         </li>
                         <?php
-                          if($rows['idUser']==1){
+                          if($rows['role']=='administrateur' ||$rows['role']=='moderateur'){
                             ?>
                         <li class="nav-item">
                             <a class="nav-link"

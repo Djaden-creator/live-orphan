@@ -113,7 +113,7 @@
                             <a class="nav-link" href="timeline.php">timeline</a>
                         </li>
                         <?php
-                          if($rows['idUser']==1){
+                          if($rows['role']=='administrateur' ||$rows['role']=='moderateur'){
                             ?>
                         <li class="nav-item">
                             <a class="nav-link" href="listofbabies.php">dash</a>
