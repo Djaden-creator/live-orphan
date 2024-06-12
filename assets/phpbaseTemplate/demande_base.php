@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['idUser'])){
+header('location:login.php');
+}else{
+    ?>
 <div class="p-5">
     <div class="container">
         <div class="d-flex justify-content-center">
@@ -68,6 +73,10 @@
                   $adoptionClass->countdemandeAll();
                 ?>
                 )
+            </a>
+            <a class="btn btn-primary" style="font-size:12px;"
+                href="statistique.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">
+                stats des dmds
             </a>
             <?php
 
@@ -168,3 +177,5 @@
         </div>
     </div>
 </div>
+<?php
+}

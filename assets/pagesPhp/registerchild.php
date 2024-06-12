@@ -29,7 +29,7 @@
     <div class="page-section">
         <div class="container">
             <h1 class="text-center wow fadeInUp" style="font-size:17px;">
-                Register a new Child
+                Add a Child
             </h1>
             <form class="main-form" method="post" enctype="multipart/form-data">
                 <?php

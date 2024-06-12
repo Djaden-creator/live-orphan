@@ -300,28 +300,38 @@ public function getChildrenforUser(){
     $encrypte_1=(($id));
     $link2="detail.php?thisthedetail=".urlencode(base64_encode($encrypte_1));
 ?>
-        <img src="<?php echo $rows['photos'] ?>" class="img-fluid"
-            style="height: 150px;width: 100%; object-fit: container;" alt="...">
+        <img src="<?php echo $rows['photos'] ?>" class="img-fluid" style="height: 150px;width: 100%;object-fit:cover;"
+            alt="...">
         <?php
               if($diff->format('%y') <= 6){
                 ?>
-        <span class="mai-star" title="youngest"
-            style="font-size:30px;position:relative;margin-top:-40px;color:#b37400;"></span>
+        <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:40px;width:40px;border-radius:20px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+            <span class="mai-star" title="youngest" style="font-size:20px;color:white;"></span>
+        </div>
+
         <?php
               }elseif($diff->format('%y') >6 && $diff->format('%y') <=10 ){
                 ?>
-        <span class="mai-arrow-up" title="younger"
-            style="font-size:40px;position:relative;margin-top:-40px;color:#b37400;"></span>
+        <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:40px;width:40px;border-radius:20px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+            <span class="mai-arrow-up" title="younger" style="font-size:20px;color:white;"></span>
+        </div>
+
         <?php
               }elseif($diff->format('%y') >10 && $diff->format('%y') <=18){
                 ?>
-        <span class="mai-thunderstorm" title="young"
-            style="font-size:40px;position:relative;margin-top:-40px;color:#d94350;"></span>
+        <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:40px;width:40px;border-radius:20px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+            <span class="mai-thunderstorm" title="younger" style="font-size:20px;color:white;"></span>
+        </div>
         <?php
               }else{
                 ?>
-        <span class="mai-arrow-down" title="adult"
-            style="font-size:40px;position:relative;margin-top:-40px;color:#e69500;"></span>
+        <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:40px;width:40px;border-radius:20px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+            <span class="mai-arrow-down" title="younger" style="font-size:20px;color:white;"></span>
+        </div>
         <?php
               }
             ?>
@@ -381,7 +391,14 @@ public function getChildrenforUser(){
 <?php
              }
         }else{
-            echo"<h6 class='text-center display-4' style='font-size:15px;'>no child finds in the system yet</h6>";
+           ?>
+<div class="container">
+    <div class="row-fluid align-items-center justify-content-center">
+        <h5 class="alert alert-danger text-center font-size-sm">no child found in the system yet</h5>
+    </div>
+</div>
+
+<?php
         }
       
 }

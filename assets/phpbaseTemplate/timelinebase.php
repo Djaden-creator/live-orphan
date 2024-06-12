@@ -1,3 +1,9 @@
+<?php
+if(!isset($_SESSION['idUser'])){
+header('location:login.php');
+}else{
+    ?>
+
 <div class="page-section">
     <div class="container">
         <div class="d-flex justify-content-center">
@@ -40,3 +46,8 @@
     </div>
 </div>
 <!-- .banner-home -->
+
+<?php
+}
+
+?>

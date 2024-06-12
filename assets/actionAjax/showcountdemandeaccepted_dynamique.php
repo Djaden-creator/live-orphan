@@ -12,19 +12,20 @@
         $iddemande=$_POST['iddemande'];
         $usersessionid=$_POST['usersessionid'];
         
-        $sql="SELECT COUNT(*) FROM adoption where iduser='$usersessionid' AND decision='accepté' OR decision='rejeté'";
+        $sql="SELECT COUNT(*) FROM adoption where iduser='$usersessionid'";
         $res = $pdo->query($sql);
         $count = $res->fetchColumn();
         if($count){
-           ?>
-Vous avez <?php echo $count; ?><i class="material-icons text-info mr-2">demande(s) terminée(s)</i>
+          ?>
+il vous reste que <strong> <?php echo $count; ?> </strong><i class="material-icons text-info mr-2"> demande(s) en
+    total</i>
+<?php 
+                  }else{
+                      ?>
+en totalisté Vous avez <?php echo $count; ?> <i class="material-icons text-info mr-2"> demande(s) restante(s) </i>
 <?php
-        }else{
-            ?>
-Vous avez <?php echo $count; ?><i class="material-icons text-info mr-2">demande(s) terminée(s)</i>
-<?php
-        }
-       ?>
+                  }
+                 ?>
 <?php
  }
 }

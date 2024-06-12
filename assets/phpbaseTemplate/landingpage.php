@@ -74,7 +74,6 @@
         </div>
     </div>
     <!-- .page-section -->
-
     <div class="page-section pb-0">
         <div class="container">
             <div class="row align-items-center">
@@ -85,7 +84,7 @@
                         et accusam et justo duo dolores et ea rebum. Accusantium aperiam
                         earum ipsa eius, inventore nemo labore eaque porro consequatur ex aspernatur. Explicabo,
                         excepturi accusantium! Placeat voluptates esse ut optio facilis!</p>
-                    <a href="html/about.html" class="btn btn-primary">Learn More</a>
+                    <a href="assets/pagesPhp/about.php" class="btn btn-primary">Learn More</a>
                 </div>
                 <div class="col-lg-6 wow fadeInRight" data-wow-delay="400ms">
                     <div class="img-place custom-img-1">
@@ -101,91 +100,7 @@
 
 <div class="page-section">
     <div class="container">
-        <h1 class="text-center mb-5 wow fadeInUp">Our Doctors</h1>
-
-        <div class="owl-carousel wow fadeInUp" id="doctorSlideshow">
-            <div class="item">
-                <div class="card-doctor">
-                    <div class="header">
-                        <img src="assets/img/doctors/doctor_1.jpg" alt="">
-                        <div class="meta">
-                            <a href="#"><span class="mai-call"></span></a>
-                            <a href="#"><span class="mai-logo-whatsapp"></span></a>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <p class="text-xl mb-0">Dr. Stein Albert</p>
-                        <span class="text-sm text-grey">Cardiology</span>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card-doctor">
-                    <div class="header">
-                        <img src="assets/img/doctors/doctor_2.jpg" alt="">
-                        <div class="meta">
-                            <a href="#"><span class="mai-call"></span></a>
-                            <a href="#"><span class="mai-logo-whatsapp"></span></a>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <p class="text-xl mb-0">Dr. Alexa Melvin</p>
-                        <span class="text-sm text-grey">Dental</span>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card-doctor">
-                    <div class="header">
-                        <img src="assets/img/doctors/doctor_3.jpg" alt="">
-                        <div class="meta">
-                            <a href="#"><span class="mai-call"></span></a>
-                            <a href="#"><span class="mai-logo-whatsapp"></span></a>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
-                        <span class="text-sm text-grey">General Health</span>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card-doctor">
-                    <div class="header">
-                        <img src="assets/img/doctors/doctor_3.jpg" alt="">
-                        <div class="meta">
-                            <a href="#"><span class="mai-call"></span></a>
-                            <a href="#"><span class="mai-logo-whatsapp"></span></a>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
-                        <span class="text-sm text-grey">General Health</span>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card-doctor">
-                    <div class="header">
-                        <img src="assets/img/doctors/doctor_3.jpg" alt="">
-                        <div class="meta">
-                            <a href="#"><span class="mai-call"></span></a>
-                            <a href="#"><span class="mai-logo-whatsapp"></span></a>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
-                        <span class="text-sm text-grey">General Health</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="page-section bg-light">
-    <div class="container">
-        <h1 class="text-center wow fadeInUp">Latest News</h1>
+        <h1 class="text-center mb-5 wow fadeInUp">Our Leaders</h1>
         <div class="row mt-5">
             <div class="col-lg-4 py-2 wow zoomIn">
                 <div class="card-blog">
@@ -267,6 +182,20 @@
                 <a href="blog.html" class="btn btn-primary">Read More</a>
             </div>
 
+        </div>
+    </div>
+</div>
+
+<div class="page-section bg-light">
+    <div class="container">
+        <h1 class="text-center wow fadeInUp">Latest Reviews</h1>
+        <div class="row align-content-center justify-content-center">
+            <!-- here to fetch the reviews for visitors -->
+            <?php
+             require_once 'assets/functions/reviewClass.php';
+             $review= new reviewClass();
+             $review->fetchReviewforvisitor();
+            ?>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<footer class="page-footer mt-5">
+<footer class="page-footer">
     <div class="container">
         <div class="row px-md-3">
             <div class="col-sm-6 col-lg-3 py-3">
@@ -16,22 +16,22 @@
                     <li><a href="#">Terms & Condition</a></li>
                     <li><a href="#">Privacy</a></li>
                     <li><a href="#">Advertise</a></li>
-                    <li><a href="#">Join as Doctors</a></li>
+                    <li><a href="#">Join </a></li>
                 </ul>
             </div>
             <div class="col-sm-6 col-lg-3 py-3">
                 <h5>Our partner</h5>
                 <ul class="footer-menu">
                     <li><a href="#">One-Fitness</a></li>
-                    <li><a href="#">One-Drugs</a></li>
+                    <li><a href="#">One-Drum</a></li>
                     <li><a href="#">One-Live</a></li>
                 </ul>
             </div>
             <div class="col-sm-6 col-lg-3 py-3">
                 <h5>Contact</h5>
-                <p class="footer-link mt-2">351 Willow Street Franklin, MA 02038</p>
+                <p class="footer-link mt-2">351 kibelisa, kife 1991</p>
                 <a href="#" class="footer-link">701-573-7582</a>
-                <a href="#" class="footer-link">healthcare@temporary.net</a>
+                <a href="#" class="footer-link">liveorphan@gmail.com</a>
 
                 <h5 class="mt-3">Social Media</h5>
                 <div class="footer-sosmed mt-3">
@@ -46,8 +46,8 @@
 
         <hr>
 
-        <p id="copyright">Copyright &copy; 2020 <a href="https://macodeid.com/" target="_blank">MACode ID</a>. All right
-            reserved</p>
+        <p id="copyright">Copyright &copy; 2024 . All right
+            reserved liveOrphan</p>
     </div>
 </footer>
 
@@ -64,6 +64,18 @@
 <script src="assets/js/manipilation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+const progressCircle = document.querySelector(".autoplay-progress svg");
+const progressContent = document.querySelector(".autoplay-progress span");
+
+const swiperEl = document.querySelector("swiper-container");
+swiperEl.addEventListener("autoplaytimeleft", (e) => {
+    const [swiper, time, progress] = e.detail;
+    progressCircle.style.setProperty("--progress", 1 - progress);
+    progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+});
+</script>
 <script>
 $(document).ready(function() {
     //to make a search in the search bar
@@ -114,7 +126,7 @@ $(document).ready(function() {
         });
     });
 
-    //this code is to show the  form of sendind a message or demande on detail page.
+    //this code is to show the  form of sendind a message of demande on detail page.
     $(document).on('click', '#idchildhere', function idchildhereshowform() {
         let $this = $(this).val();
         let idchild = $(this).val();
@@ -358,6 +370,9 @@ $(document).ready(function() {
             },
             success: function(response) {
                 $('#notificationforadoption' + myidchild).html(response);
+                $('#closethetagform').html("");
+                $('.idchildhere' + myidchild).html("");
+
 
             }
         });
@@ -583,7 +598,59 @@ $(document).ready(function() {
             }
         });
     })
-});
+
+    //show form for the admin in his profil to modifier the role :
+    $(document).on('click', '.changerole', function changerole() {
+        let idsession = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/admin_modifier_role_form.php",
+            data: {
+                idsession: idsession,
+                modifier: 1
+            },
+            success: function(response) {
+                $('#formrole' + idsession).html(response);
+            }
+        })
+    });
+
+    // this will close the form of update the role
+    $(document).on('click', '.changeroleclose', function roleclose() {
+        let idsession = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/admin_modifier_role_form.php",
+            data: {
+                idsession: idsession,
+                modifier: 1
+            },
+            success: function(response) {
+                $('#formrole' + idsession).html("");
+            }
+        })
+    });
+
+    // this will update the role of the admin if id= 1
+    $(document).on('click', '.changeroleupdate', function changeroleupdate() {
+        let idsession = $(this).val();
+        let myrole = $('.myrole').val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/admin_update_role.php",
+            data: {
+                idsession: idsession,
+                myrole: myrole,
+                modifier: 1
+            },
+            success: function(response) {
+                $('#formrole' + idsession).html("");
+                $('.flushmessage' + idsession).html(response);
+
+            }
+        })
+    });
+})
 </script>
 </body>
 

@@ -48,7 +48,7 @@ public function countMess(){
             $sql="SELECT COUNT(*) FROM messageback where idUser=".$_SESSION['idUser']." AND user_check='non'";
             $res = $pdo->query($sql);
             $count = $res->fetchColumn();
-            if($count){
+            if($count > 0){
                 ?>
 <span class="mai-chatbubble"
     style="background-color:brown;padding:5px 5px;border-radius: 15px;font-size:12px;color:white;">
@@ -56,6 +56,15 @@ public function countMess(){
 </span>
 
 <?php
+            }
+            else{
+                ?>
+<span class="mai-chatbubble"
+    style="background-color:brown;padding:5px 5px;border-radius: 15px;font-size:12px;color:white;">
+    0
+</span>
+
+<?php 
             }
            
         }catch(PDOException $e){

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+    <title>LiveOrtphan Administration</title>
     <link rel="stylesheet" href="../css/tableBabies.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -164,19 +164,17 @@
                                 href="../pagesPhp/listofbabies.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">DASHBOAD</a>
                         </li>
                         <?php
-                          }else{
+                          }elseif($rows['role']=='utilisateur'){
                             ?>
                         <li class="nav-item">
                             <a class="nav-link"
                                 href="../pagesPhp/messageUser_space.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">
-                                <span class="mai-chatbubble"
-                                    style="background-color:brown;padding:5px 5px;border-radius: 15px;font-size:12px;color:white;">
-                                    <?php
+                                <?php
                                 require_once'../functions/messageClass.php';
                                 $clmessage= new message();
                                 $clmessage->countMessforUser();
                                 ?>
-                                </span></a>
+                            </a>
                         </li>
                         <?php
                           }

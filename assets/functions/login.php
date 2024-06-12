@@ -47,7 +47,7 @@ if(!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
     else
 {
 $password_hash = md5($password);
-//Récupérer les utilisateurs
+//Récupérer les données utilisateurs
 $query = "SELECT * FROM users WHERE email = :email and password= :password_hash";
 
 $stmt = $pdo->prepare($query);
@@ -77,7 +77,7 @@ $hash=md5($rowsit['name']);
 if($rowsit['niveau_du_compte']=="bloqué"){
 header('location:help.php');
 }else{
-header('location:timeline.php?itsme='.$_SESSION['name'].'/'.$hash.'');
+header('location:timeline.php?itsme='.$_SESSION['idUser'].'/'.$hash.'');
 }
 }
 }

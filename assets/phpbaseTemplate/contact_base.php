@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['idUser'])){
+header('location:login.php');
+}else{
+    ?>
 <div class="page-section">
     <div class="container">
         <?php
@@ -72,3 +77,5 @@
                     ?>
     </div>
 </div>
+<?php
+}

@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['idUser'])){
+header('location:login.php');
+}else{
+    ?>
 <div class="page-section">
     <div class="container">
         <h1 class="text-center wow fadeInUp">Register Someone</h1>
@@ -93,3 +98,5 @@
         </div>
     </div>
 </div>
+<?php
+}

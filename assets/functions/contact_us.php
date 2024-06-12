@@ -51,37 +51,54 @@ elseif(!preg_match('/^[a-zA-Z\d\s\._\W\w]+$/',$message)){
     $premess='<span class="text-danger" style="font-size:12px;">votre message n\'est pas valide</span>';
     }
     else{
-       
-                 $sql="INSERT INTO `message`(`idUser`, `name`, `email`, `reference_number`, `description`, `create_at`, `status`)
-                  VALUES (:idUser,:name,:email,:reference,:message,NOW(),'unread')";
-                 
-                   $statement=$pdo->prepare($sql);
-                   $statement->bindParam(':idUser',$idUser);
-                   $statement->bindParam(':name',$name);
-                   $statement->bindParam(':email',$email);
-                   $statement->bindParam(':reference',$reference);
-                   $statement->bindParam(':message',$message);
-        
-                  if($statement->execute()){
-                    ?>
-<div class="alert-success" style="display:flex;justify-content:center;
-                                         align-items:center;
-                                              border-radius:5px;padding:10px;">
-    <h5 style="color:black;font-size:12px">votre message a été envoyé avec succées</h5>
+        $sql_e = "SELECT * FROM  adoption WHERE reference=:reference";
+        $stmt = $pdo->prepare($sql_e);
+        $stmt->bindParam(':reference',$reference);
+        $stmt->execute();
+         //Est-ce que le numero de reference existe deja?
+         $count=$stmt->rowCount();
+         if($count==1){
+            $sql="INSERT INTO `message`(`idUser`, `name`, `email`, `reference_number`, `description`, `create_at`, `status`)
+            VALUES (:idUser,:name,:email,:reference,:message,NOW(),'unread')";
+           
+             $statement=$pdo->prepare($sql);
+             $statement->bindParam(':idUser',$idUser);
+             $statement->bindParam(':name',$name);
+             $statement->bindParam(':email',$email);
+             $statement->bindParam(':reference',$reference);
+             $statement->bindParam(':message',$message);
+    
+            if($statement->execute()){
+              ?>
+<div class="alert alert-success" style="display:flex;justify-content:center;
+                                   align-items:center;
+                                        border-radius:5px;padding:5px;">
+    <h5 style="color:black;font-size:14px">votre message a été envoyé avec succées avec un bon numero de reference</h5>
 </div>
 <?php
-                  }else{
-                  ?>
+            }else{
+            ?>
 <div style="background-color:#d94350;display:flex;justify-content:center;
-                     align-items:center;
-                          border-radius:5px;padding:10px 20px;">
+               align-items:center;
+                    border-radius:5px;padding:10px 20px;">
     <h5 style="color: #f2f2f2;font-size:12px">votre message n'a pas été envoyé</h5>
 </div>
 <?php
-                  }
-                }
-         
+            }
+
+         }
+         else{
+            ?>
+<div class="alert alert-danger" style="display:flex;justify-content:center;
+               align-items:center;
+                    border-radius:5px;padding:5px;">
+    <h5 style="color:black;font-size:14px">veuillez mettre un bon numero de reference ou sans cela contactez nous
+        directement sur notre email:djaden@gmail.com</h5>
+</div>
+<?php
+         }
     }
+}
 }
 catch(PDOException $e){
 echo"echec" .$e->getMessage();

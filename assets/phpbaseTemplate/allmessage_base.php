@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['idUser'])){
+header('location:login.php');
+}else{
+    ?>
 <div class="container-fluid">
     <div class="d-flex">
         <div class="bg-body-tertiary col-sm-4">
@@ -21,3 +26,5 @@
     </div>
 
 </div>
+<?php
+}

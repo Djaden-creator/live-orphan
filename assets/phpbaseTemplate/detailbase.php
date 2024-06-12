@@ -97,6 +97,39 @@
                 <img src="<?php echo $rows['photos'] ?>" class="img-fluid"
                     style="height: 450px;width: 640%; object-fit: cover;" alt="...">
                 <div class="text-center" style="margin: 10px;">
+                    <?php
+              if($diff->format('%y') <= 6){
+                ?>
+                    <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:60px;width:60px;border-radius:30px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+                        <span class="mai-star" title="youngest" style="font-size:20px;color:white;"></span>
+                    </div>
+
+                    <?php
+              }elseif($diff->format('%y') >6 && $diff->format('%y') <=10 ){
+                ?>
+                    <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:60px;width:60px;border-radius:30px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+                        <span class="mai-arrow-up" title="younger" style="font-size:20px;color:white;"></span>
+                    </div>
+
+                    <?php
+              }elseif($diff->format('%y') >10 && $diff->format('%y') <=18){
+                ?>
+                    <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:60px;width:60px;border-radius:30px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+                        <span class="mai-thunderstorm" title="younger" style="font-size:20px;color:white;"></span>
+                    </div>
+                    <?php
+              }else{
+                ?>
+                    <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:60px;width:60px;border-radius:30px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+                        <span class="mai-arrow-down" title="younger" style="font-size:20px;color:white;"></span>
+                    </div>
+                    <?php
+              }
+            ?>
                     <h5 style="font-size: 12px;font-style: bold;"><?php echo $rows['name'] ?></h5>
                     <h5 style="font-size: 12px;font-style: bold;">
                         <?php echo $diff->format('%y'); ?> ans,<?php echo $rows['pays'] ?></h5>
@@ -128,8 +161,26 @@
             </p>
             <p style="font-size: 13px;color:rgb(78, 77, 77) ; padding: 10px 20px;">Enregistré il
                 ya:<?php echo timeAction($create); ?></p>
-            <button class="btn btn-primary" id="idchildhere" style="font-size:10px;"
-                value="<?php echo $rows['idChild']; ?>">Adopter?</button>
+            <?php
+                   $query1 ="SELECT * FROM adoption WHERE idchild=$encrypte_2 ";
+                   $stmt1 = $pdo->query($query1);
+                   $child1 = $stmt1->fetchall(PDO::FETCH_ASSOC);
+              
+                   if($child1){
+                           ?>
+            <small class="alert alert-danger" style="font-size:12px;">impossible de faire une deuxieme demande</small>
+            <?php
+                           }else{
+                            ?>
+            <div class="idchildhere<?php echo $rows['idChild']; ?>">
+                <button class="btn btn-primary" id="idchildhere" style="font-size:10px;"
+                    value="<?php echo $rows['idChild']; ?>">Adopter?</button>
+            </div>
+            <?php
+                           }
+                ?>
+
+
             <!-- here the notification for adoption -->
             <div style="padding: 20px;" id="notificationforadoption<?php echo $rows['idChild']; ?>"></div>
             <!-- here the notification for adoption -->

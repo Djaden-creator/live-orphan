@@ -14,7 +14,7 @@ $myemail = $_POST['myemail'];
 $mynumber = $_POST['mynumber'];
 $mymessage = $_POST['mymessage'];
 if(empty($myname)||empty($myemail)||empty($mynumber)||empty($mymessage)){
-echo"<span class='alert-danger' style='padding: 3px;font-size 10px;'>tout les champs doivent etre remplis</span>";
+echo"<span class='alert-danger' style='padding: 3px;font-size 10px;'>tout les champs doivent etre remplis,rfraichissez la page!!</span>";
 }
 elseif (!preg_match('/^[a-zA-Z\s]+$/',$myname)){
     echo'<span class="text-danger" style="font-size:12px;">votre nom doit avoir au moin une lettre majiscule,miniscule et un espace</span>';
@@ -45,7 +45,7 @@ if($statement->execute()){
 <div class="alert alert-success">
     <span>
         votre demande a été envoyé,vous allez etre contacter par un de nos agent sur votre
-        email 7 jour ouvrable
+        email ou sur votre messagerie live orphan 7 jour ouvrable
     </span>
 </div>
 <?php

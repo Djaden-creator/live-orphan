@@ -4,7 +4,7 @@
         <tr>
             <th>Name</th>
             <th>Age</th>
-            <th>status</th>
+            <th>role</th>
             <th>compte</th>
             <th>Actions</th>
             <th>Decision</th>
@@ -36,16 +36,19 @@
         <tr>
             <td><?php echo $rows['name']?></td>
             <td><?php echo $diff->format('%y'); ?> ans</td>
-            <?php
-           if($rows['idUser']==1){
-            ?><td>Administrateur</td><?php
-           }elseif($rows['idUser']==2){
-            ?><td>Moderateur</td><?php
-           }
-           else{
-            ?><td>Utilisateur</td><?php
-           }
-        ?>
+            <td>
+                <select id="selectrole<?php echo $rows['idUser'];?>">
+                    <option value="<?php echo $rows['role'];?>"><?php echo $rows['role'];?></option>
+                    <option value="secretaire">secretaire</option>
+                    <option value="moderateur">moderateur</option>
+                    <option value="administrateur">administrateur</option>
+                    <option value="utilisateur">utilisateur</option>
+                </select>
+                <button style="background-color:none;border:none;outline:none;" id="rolebtn"
+                    value="<?php echo $rows['idUser'];?>">
+                    ok
+                </button>
+            </td>
             <?php
            if ($rows['niveau_du_compte']=="active"){
             ?><td id="buttonbloquer<?php echo $rows['idUser']?>"><button class="btn-primary" id="activer"

@@ -9,8 +9,8 @@
 
     <meta name="copyright" content="MACode ID, https://macodeid.com/">
 
-    <title>One Health - Medical Center HTML5 Template</title>
-
+    <title>Live Orphan </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="assets/css/maicons.css">
     <link rel="stylesheet" href="../css/maicons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -243,7 +243,7 @@
                             <a class="nav-link" href="../../../one/index.php">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="html/about.html">ABOUT US</a>
+                            <a class="nav-link" href="assets/pagesPhp/about.php">ABOUT US</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="assets/pagesPhp/contact.php">CONTACT</a>
