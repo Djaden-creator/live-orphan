@@ -31,80 +31,28 @@
            }
 //1.security with regex for name
 // Check only letters; the regex searches for anything that isn't a plain letter
-if (!preg_match('/^[a-zA-Z\s]+$/',$name)){
-$pregname='<span class="text-danger" style="font-size:12px;">only alphabet allowed</span>';
-}
-// Check a value is provided of name
-$len = strlen($name);
-if ($len == 0) {
-$lengstring='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
+elseif (!preg_match('/^[a-zA-Z\s]+$/',$name)){
+$pregname='<span class="text-danger" style="font-size:12px;">only alphabet allowed ex: Djaden kibelisa</span>';
 }
 
-// Check the string is long to long for name
-if ($len >$max) {
-$maxlength='<span class="text-danger" style="font-size:12px;">
- le nom ne peut pas depasser '.$max.'characteur</span>';
-}
 //security regex for email adresse
-if(!preg_match('/^[a-zA-Z\d\._]+@[a-zA-Z\d\._].[a-zA-Z\d\._]{2,}+$/',$email)){
-$pregmail='<span class="text-danger" style="font-size:12px;">invalid email</span>';
-}
-// Check a value is provided of email
-$lenmail = strlen($email);
-if ($lenmail == 0) {
-$lengsmail='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
-}
-
-// Check the string is long to long for name
-if ($lenmail >40) {
-$maxmail='<span class="text-danger" style="font-size:12px;">email ne dois pas depasser 40 characteur</span>';
+elseif(!preg_match('/^[a-zA-Z\d\._]+@[a-zA-Z\d\._].[a-zA-Z\d\._]{2,}+$/',$email)){
+$pregmail='<span class="text-danger" style="font-size:12px;">invalid email voici le format de votre email ex: Djaden@gmail.com</span>';
 }
 
 //security regex for number formation
-if (!preg_match('/^(?:\+33\s|d)[1-9](?:\s\d{2}){4}$/',$tel)){
+elseif (!preg_match('/^(?:\+33\s|d)[1-9](?:\s\d{2}){4}$/',$tel)){
     $pretel='<span class="text-danger" style="font-size:12px;">votre numero doit commencer par +33 et des espaces apres deux chifres ex:+33 1 25 63 96 96  avoir que de chiffres</span>';
 }
-    // Check a value is provided of tel
-    $lentel = strlen($tel);
-    if ($lentel == 0) {
-    $lentel='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
-    }
-    
-    // Check the string is long to long for name
-    if ($lentel >15) {
-    $maxtel='<span class="text-danger" style="font-size:12px;">le numero ne doit pas depasser 15 chiffre</span>';
-    }
 //security regex for adresse formation
-if(!preg_match('/^[\d]+[\s][a-zA-Z\s]+[\d]{5}$/',$adresse)){
-    $preadress='<span class="text-danger" style="font-size:12px;">invalid adresse</span>';
+elseif(!preg_match('/^[\d]+[\s][a-zA-Z\s]+[\d]{5}$/',$adresse)){
+    $preadress='<span class="text-danger" style="font-size:12px;">votre adress doit suivre ce format ex: 152 rue andre bollier 69007</span>';
     }
-    // Check a value is provided of tel
-    $lenadress = strlen($adresse);
-    if ($lenadress == 0) {
-    $lenadress='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
-    }
-    
-    // Check the string is long to long for name
-    if ($lenadress >50) {
-    $maxadress='<span class="text-danger" style="font-size:12px;">le numero ne doit pas depasser 10 characters</span>';
-    }
-
     //security regex for password formation
-if(!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password)){
+elseif(!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password)){
     $invalipass='<span class="text-danger" style="font-size:12px;">
-    le mot de passe doit avoir au moin un characteur en maj,miniscule,one number,un special characteur!@\|
+    le mot de passe doit avoir au moin un characteur en maj,miniscule,one number,un special characteur!@\| avoir au moins 8 caracteres
     </span>';
-    }
-    // Check a value is provided of tel
-    $longpass = strlen($password);
-    if ($longpass == 0) {
-    $longpass='<span class="text-danger" style="font-size:12px;">ce champ ne doit pas etre vide</span>';
-    }
-    
-    // Check the string is long to long for name
-    if ($longpass >20) {
-    $maxpass='<span class="text-danger" style="font-size:12px;">
-    le mot de pass ne doit pas avoirplus de 20 characters</span>';
     }
     else{
         $password_hash = md5($password);
@@ -122,7 +70,7 @@ if(!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
          $counttwo=$state->rowCount();
          if($count==1){
             ?>
-<div class="btn btn-primary" style="display:flex;justify-content:center; align-items:center;
+<div class="btn btn-danger" style="display:flex;justify-content:center; align-items:center;
             border-radius:5px;padding:10px 20px;">
     <h5 style="color: #f2f2f2;font-size:12px">
         desolé cet nom existe deja

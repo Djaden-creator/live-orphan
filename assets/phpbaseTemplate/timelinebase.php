@@ -8,8 +8,8 @@ header('location:login.php');
     <div class="container">
         <div class="d-flex justify-content-center">
             <form action="" class="d-flex" style="width: 100%;">
-                <input type="search" class="form-control mesearch" id="searchfiled"
-                    placeholder="search by  the age or name" style="border-radius: 30px;">
+                <input type="search" class="form-control mesearch" id="searchfiled" placeholder="search by  the name"
+                    style="border-radius: 30px;">
             </form>
         </div>
         <div>

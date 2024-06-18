@@ -10,7 +10,6 @@ $dsn = 'mysql:host=localhost;dbname=orphelinat';
         if(isset($_POST['login'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
-
         //security regex for email adresse
 if(!preg_match('/^[a-zA-Z\d\._]+@[a-zA-Z\d\._].[a-zA-Z\d\._]{2,}+$/',$email)){
     $pregmail='<span class="text-danger" style="font-size:12px;">invalid email '.$email.',</span>';

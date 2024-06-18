@@ -231,6 +231,127 @@ catch(PDOException $e){
 }
 
 
+public function getServiceuser(){
+    $dsn = 'mysql:host=localhost;dbname=orphelinat';
+    $username = 'root';
+    $password = getenv('');
+
+    try{
+        $pdo = new PDO($dsn, $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //getting all data from the database
+        $query = "SELECT * FROM services order by idService desc limit 3";
+        $stmt = $pdo->query($query);
+        $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        //Afficher les utilisateurs
+        if($services){
+            date_default_timezone_set('Europe/Paris');
+            function timemo($timeto){
+                $time_ago=strtotime($timeto);
+                $current_time=time();
+                $time_difference=$current_time -$time_ago;
+                $seconds=$time_difference;
+                $minutes=round($seconds /60); // value 60 is seconds
+                $hours=round($seconds /3600); // value 3600 is 60 mi
+                $days=round($seconds /86400);// 86400=24*60*60
+                $weeks=round($seconds /604800);//7*24*60*60;
+                $months=round($seconds /2629440); //(365+365+365+365)/5/12
+                $years=round($seconds /31553280);
+                  if($seconds <=60){
+                      return "just now";
+                  }
+                else if($minutes <=60){
+                  if($minutes==1){
+                      return "one minute ago";
+                  }else{
+                      return "$minutes minutes a go";
+              
+                  }
+                }
+                else if($hours <=24){
+                  if($hours==1){
+                      return "an hour ago";
+                  }else{
+                      return "$hours hours ago";
+              
+                  }
+                }
+                else if($days <=7){
+                  if($days==1){
+                      return "yesterday";
+                  }else{
+                      return "$days days ago";
+              
+                  }
+                }
+                //4.3 ==52/12 
+                else if($weeks <=4.3){
+                  if($weeks==1){
+                      return "a week ago";
+                  }else{
+                      return "$weeks weeks ago";
+              
+                  }
+                }
+                else if($months <=12){
+                  if($months==1){
+                      return "a month ago";
+                  }else{
+                      return "$months months ago";
+              
+                  }
+                }
+                else{
+                  if($years==1){
+                      return "one year ago";
+                  }else{
+                      return "$years years ago";
+                  }
+                } 
+            }
+            foreach($services as $rows){
+                $timeto=$rows['creer'];
+                $string=strip_tags($rows['description']);
+                if(strlen($string)>55):
+                $stringcut=substr($string,0,100);
+                $endpoint=strrpos($stringcut,' ');
+                $string=$endpoint?substr($stringcut,0,$endpoint):substr($stringcut,0);
+                $string.='...';
+                endif;
+                ?>
+    <?php
+    $id=$rows['idService'];
+    $encrypte_1=(($id));
+    $link2="assets/pagesPhp/service_detail.php?itsmyservice=".urlencode(base64_encode($encrypte_1));
+?>
+    <div class="col-md-4 py-3 py-md-0 mt-2 ">
+        <div class="card-service d-flex">
+            <div class="circle-shape bg-secondary text-white">
+                <span class="mai-settings"></span>
+            </div>
+            <p style="font-size:15px;"><?php echo $rows['type'] ?></p>
+            <a href="<?php echo $link2;?>"><span class="mai-arrow-forward"></span></a>
+        </div>
+    </div>
+    <?php
+             }
+        }else{
+            ?>
+    <div class="col-md-4 py-3 py-md-0 mt-2 ">
+        <div class="card-service d-flex">
+            <p style="font-size:15px;">Aucun service n'est disponible pour le moment</p>
+        </div>
+    </div>
+    <?php
+        }
+      
+}
+catch(PDOException $e){
+    echo"error",$e ->getMessage();
+}
+}
+
 //edit the detail of a particular employé
 public function editService() {
     $dsn = 'mysql:host=localhost;dbname=orphelinat';

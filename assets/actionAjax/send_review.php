@@ -14,6 +14,17 @@ $message = $_POST['message'];
 if(empty($name)||empty($email)||empty($note)||empty($message)){
 echo"<span class='alert alert-danger'>tout les champs doivent etre remplis</span>";
 }
+elseif (!preg_match('/^[a-zA-Z\s]+$/',$name)){
+    echo'<span class="text-danger" style="font-size:12px;">only alphabet allowed for the name</span>';
+}
+//security regex for email adresse
+elseif(!preg_match('/^[a-zA-Z\d\._]+@[a-zA-Z\d\._].[a-zA-Z\d\._]{2,}+$/',$email)){
+    echo'<span class="text-danger" style="font-size:12px;">invalid email</span>';
+}
+//security regex for adresse formation
+elseif(!preg_match('/^[a-zA-Z\d\s\._\W\w]+$/',$message)){
+    echo'<span class="text-danger" style="font-size:12px;">votre message n\'est pas valide</span>';
+    }
 else{
 
 $sql="INSERT INTO `reviews`(`name`, `email`, `note`, `description`, `create_at`, `status`)

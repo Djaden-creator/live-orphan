@@ -54,6 +54,12 @@
                             <a href=""><span class="mai-mail text-primary"><?php echo $rows['email']; ?></span></a>
                             <?php
                          }
+                        }else{
+                            ?>
+                            <a href=""><span class="mai-person text-primary">Live Orphan</span></a>
+                            <span class="divider">|</span>
+                            <a href=""><span class="mai-mail text-primary"></span></a>
+                            <?php
                         }
                     }
                          catch(PDOException $e){
@@ -121,6 +127,17 @@
                 <?php
                                }
                             }
+                        }
+                        else{
+                            ?>
+                <a class="navbar-brand" href="../../../one/index.php">Live</span>-Orphan</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="https://donate.stripe.com/test_aEU6oR1ah143fHa6oo">Donate</a>
+                    </li>
+                </ul>
+
+                <?php
                         }
                         } catch(PDOException $e){
                             echo"no connection from the database";
@@ -211,19 +228,16 @@
                         else{
                             ?>
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.html">HOME</a>
+                            <a class="nav-link" href="../../../one/index.php">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="html/about.html">ABOUT US</a>
+                            <a class="nav-link" href="../pagesPhp/about.php">ABOUT US</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="html/blog.html">NEWS</a>
+                            <a class="nav-link" href="../pagesPhp/contact.php">CONTACT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="html/contact.html">CONTACT</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary ml-lg-3" href="../pagesPhp/login.php">SIGN UP</a>
+                            <a class="btn btn-primary ml-lg-3" href="../pagesPhp/login.php">LOGIN</a>
                         </li>
                         <?php
                          }}

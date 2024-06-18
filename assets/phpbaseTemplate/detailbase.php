@@ -162,15 +162,45 @@
             <p style="font-size: 13px;color:rgb(78, 77, 77) ; padding: 10px 20px;">Enregistré il
                 ya:<?php echo timeAction($create); ?></p>
             <?php
-                   $query1 ="SELECT * FROM adoption WHERE idchild=$encrypte_2 ";
+                   $query1 ="SELECT * FROM adoption where idchild=$encrypte_2";
                    $stmt1 = $pdo->query($query1);
                    $child1 = $stmt1->fetchall(PDO::FETCH_ASSOC);
               
                    if($child1){
-                           ?>
+                    foreach($child1 as $rows1){
+                        if($rows1['decision']=='Rejeté'){
+                            ?>
+            <div class="idchildhere<?php echo $rows['idChild']; ?>">
+                <button class="btn btn-danger" id="idchildhere" style="font-size:10px;"
+                    title="cet(te) enfant est reprenable" value="<?php echo $rows['idChild']; ?>">Adopter?</button>
+            </div>
+            <?php
+                        }
+                        elseif($rows1['decision']=='encours'||$rows1['decision']=='en avance'){
+                            ?>
             <small class="alert alert-danger" style="font-size:12px;">impossible de faire une deuxieme demande</small>
             <?php
-                           }else{
+                        }
+                        elseif($rows1['decision']=='Accepté'){
+                            ?>
+            <small class="alert alert-danger" style="font-size:12px;">cet(te) enfant a été deja adopté</small>
+            <?php
+                        }
+                        
+                        else{
+                            ?>
+            <div class="idchildhere<?php echo $rows['idChild']; ?>">
+                <button class="btn btn-primary" id="idchildhere" style="font-size:10px;"
+                    value="<?php echo $rows['idChild']; ?>">Adopter?</button>
+            </div>
+            <?php
+                           }
+                        ?>
+
+            <?php
+                    }
+                        }
+                           else{
                             ?>
             <div class="idchildhere<?php echo $rows['idChild']; ?>">
                 <button class="btn btn-primary" id="idchildhere" style="font-size:10px;"

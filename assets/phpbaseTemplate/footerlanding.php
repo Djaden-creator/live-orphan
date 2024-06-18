@@ -343,6 +343,7 @@ $(document).ready(function() {
             },
             success: function(response) {
                 $('#review_notification').html(response);
+                $('.solo').html("");
             }
         });
     })
@@ -650,6 +651,58 @@ $(document).ready(function() {
             }
         })
     });
+    //here to get the form of email to modify the password forgotten
+    $(document).on('click', '.startforgot', function startforgot(event) {
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/show_form_motdepasse_oublier.php",
+            data: {
+                modifier: 1
+            },
+            success: function(response) {
+                $('.motdepass').html(response);
+
+            }
+        })
+    });
+
+    // this code will open the form to modify the password
+    $(document).on('click', '.modifyme', function modifyme() {
+        let mailget = $('.mailget').val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/modify_forgoten_pass_redirecte.php",
+            data: {
+                mailget: mailget,
+                modifier: 1
+            },
+            success: function(response) {
+                $('.error').html(response);
+                $('.offthis').html("");
+            }
+        })
+    });
+
+    //now we can modify the password for this email adress
+    $(document).on('click', '.herewego', function herewego() {
+        let hiddenmail = $('.hiddenmail').val();
+        let passget = $('.passget').val();
+        $.ajax({
+            type: "POST",
+            url: "../actionAjax/forgottenPasswords.php",
+            data: {
+                hiddenmail: hiddenmail,
+                passget: passget,
+                modifier: 1
+            },
+            success: function(response) {
+                $('.error').html(response);
+                $('.onthis').html("");
+            }
+        })
+    });
+
 })
 </script>
 </body>

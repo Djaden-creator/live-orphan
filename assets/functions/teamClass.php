@@ -150,6 +150,134 @@ catch(PDOException $e){
 }
 }
 
+
+//get all team 
+public function getTeam(){
+    $dsn ='mysql:host=localhost;dbname=orphelinat';
+    $username = 'root';
+    $password = getenv('');
+
+    try{
+        $pdo = new PDO($dsn, $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //getting all data from the database
+        $queryone="SELECT * FROM teams ORDER by rand() limit 3";
+        $stmtement = $pdo->query($queryone);
+        $equipe = $stmtement->fetchAll(PDO::FETCH_ASSOC);
+    
+        //Afficher les utilisateurs
+        if($equipe){
+            date_default_timezone_set('Europe/Paris');
+            function realtime($timeto){
+                $time_ago=strtotime($timeto);
+                $current_time=time();
+                $time_difference=$current_time -$time_ago;
+                $seconds=$time_difference;
+                $minutes=round($seconds /60); // value 60 is seconds
+                $hours=round($seconds /3600); // value 3600 is 60 mi
+                $days=round($seconds /86400);// 86400=24*60*60
+                $weeks=round($seconds /604800);//7*24*60*60;
+                $months=round($seconds /2629440); //(365+365+365+365)/5/12
+                $years=round($seconds /31553280);
+                  if($seconds <=60){
+                      return "just now";
+                  }
+                else if($minutes <=60){
+                  if($minutes==1){
+                      return "one minute ago";
+                  }else{
+                      return "$minutes minutes a go";
+              
+                  }
+                }
+                else if($hours <=24){
+                  if($hours==1){
+                      return "an hour ago";
+                  }else{
+                      return "$hours hours ago";
+              
+                  }
+                }
+                else if($days <=7){
+                  if($days==1){
+                      return "yesterday";
+                  }else{
+                      return "$days days ago";
+              
+                  }
+                }
+                //4.3 ==52/12 
+                else if($weeks <=4.3){
+                  if($weeks==1){
+                      return "a week ago";
+                  }else{
+                      return "$weeks weeks ago";
+              
+                  }
+                }
+                else if($months <=12){
+                  if($months==1){
+                      return "a month ago";
+                  }else{
+                      return "$months months ago";
+              
+                  }
+                }
+                else{
+                  if($years==1){
+                      return "one year ago";
+                  }else{
+                      return "$years years ago";
+                  }
+                } 
+            }
+            foreach($equipe as $rows){
+                $timeto=$rows['entrance']
+                ?>
+<div class="col-lg-4 py-2 wow zoomIn">
+    <div class="card-blog">
+        <div class="header">
+            <div class="post-category">
+                <a href="#">liveOrphan</a>
+            </div>
+            <a href="blog-details.html" class="post-thumb">
+                <img style="object-fit:contain;" src="<?php echo $rows['photo'];?>" alt="">
+            </a>
+        </div>
+        <div class="body">
+            <h5 class="post-title" style="font-size:12px;">
+                poste: <?php echo $rows['poste'];?>
+            </h5>
+            <small>contact: <?php echo $rows['email'];?></small>
+            <h5 class="post-title" style="font-size:12px;">
+                tel: <?php echo $rows['portable'];?>
+            </h5>
+            <div class="site-info">
+                <div class="avatar mr-2">
+                    <div class="avatar-img">
+                        <img src="<?php echo $rows['photo'];?>" alt="">
+                    </div>
+                    <span><?php echo $rows['nom'];?></span>
+                </div>
+                <span class="mai-time"></span> <?php echo realtime($timeto);?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+             }
+        }else{
+            ?>
+<small class="alert alert-dark">Aucun employé n'a été enregistré par l'administrateur</small>
+<?php
+        }
+      
+}
+catch(PDOException $e){
+    echo"error",$e ->getMessage();
+}
+}   
 //edit the detail of a particular employé
 public function editEmploye() {
     $dsn = 'mysql:host=localhost;dbname=orphelinat';
@@ -287,5 +415,6 @@ public function countemployeRow(){
 </div>
 <?php
     }
-   }
+}
+
 }

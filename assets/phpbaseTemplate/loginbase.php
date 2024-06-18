@@ -26,7 +26,17 @@
             </div>
             <button type="submit" name="login" class="btn btn-primary mt-3 wow zoomIn">Connect</button>
             <a href="../pagesPhp/signup.php" style="font-size: 12px;">create an account now</a>
+            <br>
+            <button class="text-center wow fadeInUp startforgot"
+                style="font-size: 12px;outline:none;border:none;background:none;" href="oublier.php">mot de passe
+                oublié?</button>
         </form>
+        <div class="main-form motdepass">
+            <!-- here to get the email form for modification -->
+        </div>
+        <div class="main-form updatepassword">
+            <!-- here to get the email form for modification -->
+        </div>
     </div>
 </div>
 <div class="page-section banner-home bg-image" style="background-image: url(../img/banner-pattern.svg);">

@@ -9,7 +9,7 @@ header('location:login.php');
 
         <form method="post" class="main-form">
             <?php
-               include_once'../functions/admin_adduser.php';
+               require_once'../functions/admin_adduser.php';
             ?>
             <div class="row mt-2 ">
                 <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
@@ -78,7 +78,7 @@ header('location:login.php');
                 </div>
             </div>
 
-            <button type="submit" name="create" class="btn btn-primary mt-3 wow zoomIn">Creat now</button>
+            <button type="submit" name="senduser" class="btn btn-primary mt-3 wow zoomIn">Creat now</button>
         </form>
     </div>
 </div>

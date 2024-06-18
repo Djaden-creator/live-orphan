@@ -349,7 +349,7 @@ public function getChildrenforUser(){
                         ?>
             <a href="<?=$link2;?>">
                 <button class="btn btn-danger" style="color:white;font-size:10px;"
-                    title="cet enfant est reprenable">disponible</button></a>
+                    title="cet enfant est reprenable">encore disponible</button></a>
             <?php
                     }elseif($chilrow['decision']=='Accepté'){
                         ?>

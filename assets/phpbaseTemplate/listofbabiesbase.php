@@ -69,6 +69,10 @@
                 ?>
                 )
             </a>
+            <a class="btn btn-primary" style="font-size:12px;"
+                href="statistique.php?itsme=<?php echo $rows['name'];?>/<?php echo md5($rows['name']);?>">
+                stats des dmds
+            </a>
             <?php
 
                     }elseif($rows['role']=='moderateur'){
@@ -89,7 +93,6 @@
                 ?>
                 )
             </a>
-
             <?php
                     }
                     ?>

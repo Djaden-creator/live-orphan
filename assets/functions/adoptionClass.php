@@ -324,6 +324,94 @@ public function getrejeter(){
        
     }
 }
+
+//function of counting number of demande rejetées for admin:
+    public function Adminrejet(){
+        $dsn = 'mysql:host=localhost;dbname=orphelinat';
+        $username = 'root';
+        $password = getenv('');
+           
+        try{
+            $pdo = new PDO($dsn, $username, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            $sql="SELECT COUNT(*) FROM adoption where decision='Rejeté'";
+            $res = $pdo->query($sql);
+            $count = $res->fetchColumn();
+            echo $count;
+        
+    }catch(PDOException $e){
+            ?>
+<span class="alert alert-danger">ouff nous ne pouvons pas compter vos produit pour le moment</span>
+<?php
+        }
+       }
+
+//function of counting number of demande encours for admin:
+    public function Adminencours(){
+        $dsn = 'mysql:host=localhost;dbname=orphelinat';
+        $username = 'root';
+        $password = getenv('');
+           
+        try{
+            $pdo = new PDO($dsn, $username, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           
+            $sql="SELECT COUNT(*) FROM adoption where decision='encours'";
+            $res = $pdo->query($sql);
+            $count = $res->fetchColumn();
+            echo $count;
+        
+    }catch(PDOException $e){
+            ?>
+<span class="alert alert-danger">ouff nous ne pouvons pas compter vos produit pour le moment</span>
+<?php
+        }
+       }
+
+//function of counting number of demande en avance for admin:
+    public function Adminenavance(){
+        $dsn = 'mysql:host=localhost;dbname=orphelinat';
+        $username = 'root';
+        $password = getenv('');
+           
+        try{
+            $pdo = new PDO($dsn, $username, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            $sql="SELECT COUNT(*) FROM adoption where decision='en avance'";
+            $res = $pdo->query($sql);
+            $count = $res->fetchColumn();
+            echo $count;
+           
+    }catch(PDOException $e){
+            ?>
+<span class="alert alert-danger">ouff nous ne pouvons pas compter vos produit pour le moment</span>
+<?php
+        }
+       }
+
+//function of counting number of demande accepter for admin:
+    public function Adminaccepter(){
+        $dsn = 'mysql:host=localhost;dbname=orphelinat';
+        $username = 'root';
+        $password = getenv('');
+           
+        try{
+            $pdo = new PDO($dsn, $username, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            $sql="SELECT COUNT(*) FROM adoption where decision='Accepté'";
+            $res = $pdo->query($sql);
+            $count = $res->fetchColumn();
+            echo $count;
+    }catch(PDOException $e){
+            ?>
+<span class="alert alert-danger">ouff nous ne pouvons pas compter vos produit pour le moment</span>
+<?php
+        }
+       }        
+
 //function of counting number of demande terminé for a particular user:
     public function countrejetdemande(){
         $dsn = 'mysql:host=localhost;dbname=orphelinat';
@@ -411,7 +499,7 @@ public function countEnavancedemande(){
 <?php
     }
    }
-//function of counting number of demande for a particular user:
+//function of counting number of demande for admin:
     public function countdemandeAll(){
         $dsn = 'mysql:host=localhost;dbname=orphelinat';
         $username = 'root';
@@ -420,12 +508,11 @@ public function countEnavancedemande(){
         try{
             $pdo = new PDO($dsn, $username, $password);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            if(isset($_SESSION['idUser'])){
+            
             $sql="SELECT COUNT(*) FROM adoption";
             $res = $pdo->query($sql);
             $count = $res->fetchColumn();
             echo $count;
-        }
     }catch(PDOException $e){
             ?>
 <span class="alert alert-danger">ouff nous ne pouvons pas compter vos produit pour le moment</span>
@@ -543,6 +630,8 @@ public function getAlldemande(){
 </tbody>
 <?php 
                 }
+       }else{
+        echo"la liste de demande est vide";
        }
            }catch(PDOException){
        echo"error"; 

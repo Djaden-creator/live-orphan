@@ -19,35 +19,45 @@
                 $today = date("Y-m-d");
                 $diff = date_diff(date_create($dateOfBirth), date_create($today));
                 ?>
-<div class="col-sm-2 mb-3 mb-sm-0">
+<div class="col-sm-2 mb-3 mb-sm-0 mt-3">
     <?php
     $id=$rows['idChild'];
     $encrypte_1=(($id));
     $link2="detail.php?thisthedetail=".urlencode(base64_encode($encrypte_1));
     ?>
     <div class="card">
-        <img src="<?php echo $rows['photos'] ?>" class="img-fluid"
-            style="height: 150px;width: 100%; object-fit: container;" alt="...">
+        <img src="<?php echo $rows['photos'] ?>" class="img-fluid" style="height: 150px;width: 100%; object-fit: cover;"
+            alt="...">
         <?php
               if($diff->format('%y') <= 6){
                 ?>
-        <span class="mai-star" title="youngest"
-            style="font-size:30px;position:relative;margin-top:-40px;color:#b37400;"></span>
+        <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:40px;width:40px;border-radius:20px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+            <span class="mai-star" title="youngest" style="font-size:20px;color:white;"></span>
+        </div>
+
         <?php
               }elseif($diff->format('%y') >6 && $diff->format('%y') <=10 ){
                 ?>
-        <span class="mai-arrow-up" title="younger"
-            style="font-size:40px;position:relative;margin-top:-40px;color:#b37400;"></span>
+        <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:40px;width:40px;border-radius:20px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+            <span class="mai-arrow-up" title="younger" style="font-size:20px;color:white;"></span>
+        </div>
+
         <?php
               }elseif($diff->format('%y') >10 && $diff->format('%y') <=18){
                 ?>
-        <span class="mai-thunderstorm" title="young"
-            style="font-size:40px;position:relative;margin-top:-40px;color:#d94350;"></span>
+        <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:40px;width:40px;border-radius:20px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+            <span class="mai-thunderstorm" title="younger" style="font-size:20px;color:white;"></span>
+        </div>
         <?php
               }else{
                 ?>
-        <span class="mai-arrow-down" title="adult"
-            style="font-size:40px;position:relative;margin-top:-40px;color:#e69500;"></span>
+        <div class="text-center align-content-center justify-content-center" style="background-color:#d94350;height:40px;width:40px;border-radius:20px;position:
+            relative;margin-top:-40px;border:solid 3px white;">
+            <span class="mai-arrow-down" title="younger" style="font-size:20px;color:white;"></span>
+        </div>
         <?php
               }
             ?>
@@ -66,7 +76,7 @@
                     if($chilrow['decision']=='Rejeté'){
                         ?>
             <a href="<?=$link2;?>" class="btn btn-danger" style="color:white;font-size:10px;"
-                title="cet enfant est reprenable">disponible</a>
+                title="cet enfant est reprenable">encore disponible</a>
             <?php
                     }elseif($chilrow['decision']=='Accepté'){
                         ?>
@@ -77,6 +87,12 @@
                         ?>
             <button class="btn btn-warning" style="color:white;font-size:10px;"
                 title="cet enfant est deja demandé">Demandé</button>
+            <?php
+                    }
+                    elseif($chilrow['decision']=='en avance'){
+                        ?>
+            <button class="btn btn-warning" style="color:white;font-size:10px;"
+                title="cet enfant est deja demandé">pending..</button>
             <?php
                     }
                 }

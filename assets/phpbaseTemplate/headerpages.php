@@ -57,6 +57,13 @@
                             <?php
                          }
                         }
+                        else{
+                            ?>
+                            <a href=""><span class="mai-person text-primary">Live Orphan</span></a>
+                            <span class="divider">|</span>
+                            <a href=""><span class="mai-mail text-primary"></span></a>
+                            <?php
+                        }
                     }
                          catch(PDOException $e){
                               echo"no connection from the database";
